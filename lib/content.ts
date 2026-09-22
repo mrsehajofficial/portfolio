@@ -20,7 +20,8 @@ export const PERSON = {
   role: "AI Automation Engineer & Backend Developer",
   email: "mr.sehaj.official@gmail.com",
   github: "https://github.com/mrsehajofficial",
-  githubRepo: "https://github.com/mrsehajofficial/Amai-Yuki",
+  githubRepo: "https://github.com/mrsehajofficial/aegis",
+  githubRepoAmaiYuki: "https://github.com/mrsehajofficial/Amai-Yuki",
   linkedin: "https://www.linkedin.com/in/mrsehajofficial/",
   instagram: "https://www.instagram.com/sehaj.varma.official/",
   location: "India",
@@ -42,9 +43,10 @@ export const HERO = {
 
 export const TICKER = [
   "AI automation",
+  "Telegram bots",
   "LLM agents",
   "RAG pipelines",
-  "Flask backends",
+  "Python backends",
   "workflow scripts",
   "API integrations",
 ] as const;
@@ -53,6 +55,7 @@ export const TICKER = [
 
 export type Project = {
   id: string;
+  projectNo: string;
   formNo: string;
   title: string;
   subtitle: string;
@@ -61,11 +64,58 @@ export type Project = {
   result: string;
   tags: string[];
   sourceUrl: string;
+  liveUrl?: string;
   year: string;
+  buildBlocks?: { label: string; body: string }[];
 };
 
-export const FLAGSHIP: Project = {
+export const AEGIS: Project = {
+  id: "aegis",
+  projectNo: "01",
+  formNo: "01",
+  title: "Aegis",
+  subtitle: "Production-grade Telegram group management & business automation",
+  problem:
+    "Running active Telegram communities and business chats usually means cobbling together multiple third-party bots, losing control over rate limits, data privacy, and auto-replies. I wanted deterministic protection, sliding-window anti-flood, and automated business workflows under one tight, async Python architecture.",
+  built: [
+    "Asynchronous Python 3.11+ event loop built on python-telegram-bot v21+ and SQLAlchemy 2.0 with async engine support (aiosqlite & asyncpg).",
+    "Real-time protection engine: sliding-window rate limits per user, regex anti-spam, blacklists, and progressive warnings.",
+    "Telegram Business automation: private chat auto-replies, greeting responders, out-of-office fallbacks with cooldown timers, and loop guards.",
+    "Interactive terminal setup wizard (python -m app.setup), role-based administration, in-chat /biz inline dashboard, and Docker containerization.",
+  ],
+  result:
+    "Fully open-source under AGPL v3 with CI test workflows, multi-database support (SQLite & PostgreSQL), and a live web showcase deployed on Wasmer.",
+  tags: ["Python", "AsyncIO", "python-telegram-bot", "SQLAlchemy", "Automation", "Wasmer"],
+  sourceUrl: "https://github.com/mrsehajofficial/aegis",
+  liveUrl: "https://aegis.wasmer.app/",
+  year: "2026",
+  buildBlocks: [
+    {
+      label: "async python-telegram-bot v21+ engine",
+      body: "A native asynchronous event-driven Telegram architecture handling high-throughput group traffic and webhook updates without blocking I/O or dropping events.",
+    },
+    {
+      label: "dual-database sqlalchemy 2.0 orm",
+      body: "Robust relational persistence supporting SQLite with aiosqlite for lightweight setups and PostgreSQL with asyncpg for concurrent production loads.",
+    },
+    {
+      label: "sliding-window anti-flood & anti-spam",
+      body: "Per-user sliding-window rate limiting, configurable lock types (media, stickers, links), regex domain detection, and auto-punishments (mute, kick, ban).",
+    },
+    {
+      label: "telegram business chatbot workflows",
+      body: "Direct integration with Telegram Business accounts: keyword-triggered auto-replies, greeting messages for new leads, away/out-of-office auto-replies with 15-minute cooldowns, and anti-loop guards.",
+    },
+    {
+      label: "terminal setup & inline /biz dashboard",
+      body: "Interactive zero-config CLI setup wizard (python -m app.setup) plus in-chat inline keyboard controls to manage moderation, rules, and business bots live without editing config files.",
+    },
+  ],
+};
+
+export const AMAI_YUKI: Project = {
   id: "amai-yuki",
+  projectNo: "02",
   formNo: "02",
   title: "Amai Yuki",
   subtitle: "A real-time messaging app, from zero to shipped",
@@ -82,7 +132,32 @@ export const FLAGSHIP: Project = {
   tags: ["Python", "Flask", "Provider", "LLM", "Flutter"],
   sourceUrl: "https://github.com/mrsehajofficial/Amai-Yuki",
   year: "2026",
+  buildBlocks: [
+    {
+      label: "flask rest backend on sqlite",
+      body: "A modular Python/Flask REST API with SQLite persistence and input validation on every route. The first version skipped validation — one bad payload taught me that lesson permanently. Documentation thorough enough that future collaborators never have to ask.",
+    },
+    {
+      label: "direct & group chat flows",
+      body: "Real-time messaging over the project's own protocol layer instead of someone else's. That's the load-bearing decision: it's the reason latency and data flow stay mine to control.",
+    },
+    {
+      label: "custom in-app camera module",
+      body: "A capture module built directly into the Flutter frontend — the kind of feature off-the-shelf messaging backends simply don't expose, and the reason the app had to own the frontend too.",
+    },
+    {
+      label: "provider-based state architecture",
+      body: "Clean Provider-based state across the frontend so chat, camera, and LLM-feature state stay predictable as the app grows. Boring on purpose; boring is what survives.",
+    },
+    {
+      label: "llm integrations in chat",
+      body: "OpenAI & Gemini wired into chat workflows via prompt orchestration. The goal isn't a flashy demo — it's an LLM feature that behaves the same on a Tuesday afternoon as it did on launch day.",
+    },
+  ],
 };
+
+export const PROJECTS: readonly Project[] = [AEGIS, AMAI_YUKI];
+export const FLAGSHIP: Project = AEGIS;
 
 export const EVIDENCE = [
   {
@@ -111,7 +186,7 @@ export const ABOUT = {
     "I'm Sehaj. I build automation and backends from India, and I work remotely with anyone, anywhere.",
     "The whole thing clicked for me because of logic puzzles. There's a specific satisfaction in watching a script do, in six seconds, the task you used to lose an afternoon to. Every manual step I script away is a step nobody ever does again — that math is addictive.",
     "Right now I'm deep in AI integrations: prompt orchestration, RAG architecture, agents that actually call external APIs instead of hallucinating an answer. The gap between a demo and something reliable is where all the interesting engineering lives, and that's where I've been camping.",
-    "On the backend side I ship Flask REST APIs on clean SQLite schemas. Input validation on every route, modular structure, and documentation good enough that future-me doesn't curse present-me.",
+    "On the backend side I ship Flask REST APIs on clean SQLite schemas and asynchronous Python systems like Aegis with SQLAlchemy ORM. Input validation on every route, modular structure, and documentation good enough that future-me doesn't curse present-me.",
   ],
   pills: ["Workflow Automation", "Clean API Structures", "AI API Integrations", "System Scripting"],
   stats: [
@@ -133,13 +208,13 @@ export const STACK: readonly Capability[] = [
   },
   {
     name: "Backend",
-    items: ["Python", "Flask", "REST APIs", "SQLite"],
-    where: "The pattern: Flask REST APIs on clean SQLite schemas. Modular code, validation on every route, docs you can actually read. Amai Yuki's messaging backend is the flagship example.",
+    items: ["Python", "Flask", "REST APIs", "SQLite", "SQLAlchemy", "AsyncIO"],
+    where: "The pattern: Flask REST APIs and asynchronous Python bots (python-telegram-bot + SQLAlchemy) on SQLite or PostgreSQL schemas. Modular code, validation on every route, audit logs, and docs you can actually read. Aegis and Amai Yuki are the primary examples.",
   },
   {
     name: "Automation",
-    items: ["Python scripting", "Scheduled jobs", "File processing", "API integrations"],
-    where: "10+ private Python scripts across scheduled jobs, file pipelines, and API-to-API glue. Each one exists because I got tired of doing the same thing twice. The best ones run for months without anyone remembering they exist.",
+    items: ["Python scripting", "Telegram Bots", "Scheduled jobs", "File processing", "API integrations"],
+    where: "Aegis (Telegram group management and Business auto-reply bots) plus 10+ private Python scripts across scheduled jobs, file pipelines, and API-to-API glue. Each one exists because I got tired of doing the same thing twice. The best ones run for months without anyone remembering they exist.",
   },
   {
     name: "Frontend",
@@ -148,8 +223,8 @@ export const STACK: readonly Capability[] = [
   },
   {
     name: "Deployment",
-    items: ["Vercel", "Netlify", "Render", "Wasmer"],
-    where: "Four platforms so far, each picked per project rather than by habit. This portfolio runs as a static Next.js build on Wasmer — prerendered, gzip-compressed, and checked against Lighthouse every time I touch it.",
+    items: ["Wasmer", "Vercel", "Netlify", "Render", "Docker"],
+    where: "Five platforms so far, each picked per project rather than by habit. Both this portfolio and the live Aegis showcase run on Wasmer — prerendered, fast, and checked against Lighthouse every time I touch it.",
   },
 ];
 
@@ -164,17 +239,22 @@ export const FAQS: readonly Faq[] = [
   {
     question: "Who is Sehaj Varma?",
     answer:
-      "An AI Automation Engineer and Backend Developer from India, open to remote work worldwide. I build LLM agents, RAG pipelines, Python automation suites, and Flask backends — mostly for people who are tired of doing the same manual workflow for the hundredth time.",
+      "An AI Automation Engineer and Backend Developer from India, open to remote work worldwide. I build LLM agents, RAG pipelines, Python automation suites, Telegram bots, and backend architectures — mostly for people who are tired of doing the same manual workflow for the hundredth time.",
   },
   {
     question: "What does he specialize in?",
     answer:
-      "Two things that overlap a lot: workflow automation (Python scripts for scheduled jobs, file processing, API-to-API integration) and backend engineering (Flask REST APIs on clean SQLite schemas, with validation and documentation I'm not ashamed of).",
+      "Two things that overlap a lot: workflow automation (Telegram bots like Aegis, Python scripts for scheduled jobs, file processing, API-to-API integration) and backend engineering (async Python architectures and Flask REST APIs on clean SQLite/PostgreSQL schemas, with validation and documentation I'm not ashamed of).",
+  },
+  {
+    question: "What is Aegis?",
+    answer:
+      "Aegis is my production-grade Telegram group management bot and business automation suite. Built with Python 3.11+, python-telegram-bot v21+, and SQLAlchemy 2.0 (async SQLite & PostgreSQL). Features sliding-window anti-flood protection, anti-spam, and Telegram Business auto-replies with private chat keyword routing.",
   },
   {
     question: "What is Amai Yuki?",
     answer:
-      "My flagship project — a cross-platform real-time messaging app with direct and group chats, a custom in-app camera module, and Provider-based state architecture. Python/Flask backend with SQLite, Flutter/Dart frontend. The frontend is open-source and runnable today; the backend is private but fully functional.",
+      "A cross-platform real-time messaging app with direct and group chats, a custom in-app camera module, and Provider-based state architecture. Python/Flask backend with SQLite, Flutter/Dart frontend. The frontend is open-source and runnable today; the backend is private but fully functional.",
   },
   {
     question: "What AI technologies does he work with?",
@@ -184,7 +264,7 @@ export const FAQS: readonly Faq[] = [
   {
     question: "What is his tech stack?",
     answer:
-      "Five groups — AI (OpenAI, Gemini, RAG, agents, prompt orchestration), Backend (Python, Flask, REST, SQLite), Automation (scripting, scheduled jobs, file processing, API integrations), Frontend (HTML/CSS/JavaScript, Flutter, Dart), and Deployment (Vercel, Netlify, Render, Wasmer).",
+      "Five groups — AI (OpenAI, Gemini, RAG, agents, prompt orchestration), Backend (Python, Flask, REST, SQLite, SQLAlchemy, AsyncIO), Automation (Telegram bots, scripting, scheduled jobs, file processing, API integrations), Frontend (HTML/CSS/JavaScript, Flutter, Dart), and Deployment (Wasmer, Vercel, Netlify, Render, Docker).",
   },
   {
     question: "Is Sehaj Varma available for freelance work?",

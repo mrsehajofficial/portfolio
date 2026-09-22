@@ -6,10 +6,10 @@ import { scrollToSection } from "@/lib/scrollToSection";
 import { answerFor, type KnowledgeCard } from "@/lib/portfolio-knowledge";
 
 const SUGGESTIONS = [
+  "Tell me about Aegis",
   "What AI projects has Sehaj built?",
   "What's his tech stack?",
   "Tell me about Amai Yuki",
-  "Is he available for freelance work?",
 ];
 
 /**

@@ -12,44 +12,56 @@ Sehaj Varma is an AI Automation Engineer and Backend Developer based in India, o
 - GitHub: github.com/mrsehajofficial
 - LinkedIn: https://www.linkedin.com/in/mrsehajofficial/
 - Instagram: https://www.instagram.com/sehaj.varma.official/
-- Flagship open-source project: https://github.com/mrsehajofficial/Amai-Yuki
+- Flagship open-source projects:
+  - Aegis: https://github.com/mrsehajofficial/aegis (Live: https://aegis.wasmer.app/)
+  - Amai Yuki: https://github.com/mrsehajofficial/Amai-Yuki
 - Canonical origin: https://sehaj.wasmer.app/
 
 ## What Sehaj builds
 
+- **Telegram bots & Business automation**: Production-grade group management and auto-reply bots built with Python 3.11+, python-telegram-bot v21+, and SQLAlchemy 2.0 (see Aegis).
 - **LLM agents & RAG pipelines**: OpenAI and Gemini API integrations, prompt orchestration, Retrieval-Augmented Generation architecture, conversational agents that call external APIs for real data instead of hallucinating.
-- **Python automation**: private scripts for scheduled jobs, file processing, and API-to-API integrations — 10+ shipped, each turning a repeated manual step into a repeatable process.
-- **Flask backends**: modular REST APIs on clean SQLite schemas, with input validation on every route and documentation good enough to read without asking questions.
+- **Python automation**: Telegram automation, private scripts for scheduled jobs, file processing, and API-to-API integrations — 10+ shipped, each turning a repeated manual step into a repeatable process.
+- **Python backends**: modular REST APIs and async event loop architectures on clean SQLite and PostgreSQL schemas, with input validation on every route and documentation good enough to read without asking questions.
 - **Frontend & mobile**: accessible HTML/CSS/JS, plus Flutter/Dart (Provider-based state) — see Amai Yuki.
 
-## Flagship project: Amai Yuki
+## Featured projects
 
-- Cross-platform real-time messaging app: direct & group chats, a custom in-app camera module, Provider-based state architecture.
+### 01 — Aegis (Telegram Group Management & Business Bot)
+- Production-grade Telegram group management bot & business automation suite.
+- Stack: Python 3.11+, python-telegram-bot v21+, SQLAlchemy 2.0 (async SQLite & PostgreSQL), Docker, Wasmer.
+- Features: sliding-window anti-flood rate limits, regex anti-spam, blacklist enforcement, automatic warnings, and Telegram Business auto-replies with private-chat keyword triggers and out-of-office cooldowns.
+- Open-source on GitHub: https://github.com/mrsehajofficial/aegis
+- Live showcase: https://aegis.wasmer.app/
+
+### 02 — Amai Yuki (Real-Time Messaging App)
+- Cross-platform real-time messaging app: direct & group chats, custom in-app camera module, Provider-based state architecture.
 - Stack: Python/Flask REST backend on SQLite + Flutter/Dart frontend.
-- The frontend is open-source and testable today; the backend is private but fully functional and documented.
+- The frontend is open-source and testable today at https://github.com/mrsehajofficial/Amai-Yuki; the backend is private but fully functional.
 - LLM features are layered into chat via prompt orchestration.
 
 ## Availability
 
-- Currently available for: AI automation, Python backends, API integration, freelance projects, remote work worldwide.
+- Currently available for: AI automation, Python backends, Telegram bots, API integration, freelance projects, remote work worldwide.
 - Response time: replies within a day, usually faster.
 
 ## Pages
 
 - [Home](https://sehaj.wasmer.app/) — portfolio overview: work, about, stack, FAQ, contact, and structured data.
-- [Work](https://sehaj.wasmer.app/work) — the full Amai Yuki case study plus automation and AI/RAG evidence.
+- [Work](https://sehaj.wasmer.app/work) — full case studies for Aegis and Amai Yuki plus automation and AI/RAG evidence.
 - [About](https://sehaj.wasmer.app/about) — expanded bio, how Sehaj works, and current availability.
 - [Stack](https://sehaj.wasmer.app/stack) — capability groups with where each tool ships.
 - [FAQ](https://sehaj.wasmer.app/faq) — plain answers with FAQPage structured data.
 
 ## FAQ
 
-- Who is Sehaj Varma? An AI Automation Engineer and Backend Developer from India, open to remote work worldwide. He builds LLM agents, RAG pipelines, Python automation suites, and Flask backends.
-- What does he specialize in? Workflow automation (Python scripts for scheduled jobs, file processing, API integration) and backend engineering (Flask REST APIs on clean SQLite schemas).
-- What is Amai Yuki? His flagship project: a cross-platform real-time messaging app with direct and group chats, a custom camera module, and Provider-based state — Python/Flask backend with SQLite, Flutter/Dart frontend.
+- Who is Sehaj Varma? An AI Automation Engineer and Backend Developer from India, open to remote work worldwide. He builds Telegram bots, LLM agents, RAG pipelines, Python automation suites, and backends.
+- What does he specialize in? Workflow automation (Telegram bots like Aegis, Python scripts for scheduled jobs, file processing, API integration) and backend engineering (async Python architectures and Flask REST APIs on clean schemas).
+- What is Aegis? His Telegram group management bot and business automation suite built with Python 3.11+, python-telegram-bot v21+, and SQLAlchemy 2.0.
+- What is Amai Yuki? His cross-platform real-time messaging app with direct and group chats, a custom camera module, and Provider-based state — Python/Flask backend with SQLite, Flutter/Dart frontend.
 - What AI technologies does he work with? OpenAI and Gemini integrations, prompt orchestration, RAG architecture, and agents wired to external APIs.
-- What is his tech stack? AI (OpenAI, Gemini, RAG, agents, prompt orchestration), Backend (Python, Flask, REST, SQLite), Automation (scripting, scheduled jobs, file processing, API integrations), Frontend (HTML/CSS/JS, Flutter, Dart), Deployment (Vercel, Netlify, Render, Wasmer).
-- Is he available for freelance work? Yes — AI automation, Python backends, API integration, freelance projects. Contact mr.sehaj.official@gmail.com or github.com/mrsehajofficial.
+- What is his tech stack? AI (OpenAI, Gemini, RAG, agents, prompt orchestration), Backend (Python, Flask, REST, SQLite, SQLAlchemy, AsyncIO), Automation (Telegram bots, scripting, scheduled jobs, file processing, API integrations), Frontend (HTML/CSS/JS, Flutter, Dart), Deployment (Wasmer, Vercel, Netlify, Render, Docker).
+- Is he available for freelance work? Yes — AI automation, Python backends, Telegram bots, API integration, freelance projects. Contact mr.sehaj.official@gmail.com or github.com/mrsehajofficial.
 
 ## Usage notes
 

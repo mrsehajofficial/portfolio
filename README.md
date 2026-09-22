@@ -36,8 +36,18 @@ I am an **AI Automation Engineer & Backend Developer** from India, building soft
 
 ---
 
-## 🚀 Featured Project: Amai Yuki
+## 🚀 Featured Projects
 
+### 01. Aegis — Telegram Group Management & Business Bot
+**Production-grade Telegram group management bot & business automation suite.**
+
+- **Overview:** Asynchronous Python bot engineered for deterministic group moderation, rate-limiting, and direct Telegram Business chatbot integration.
+- **Key Features:** Sliding-window anti-flood protection, regex anti-spam, blacklists, progressive auto-warns, and Telegram Business private-chat auto-replies with out-of-office cooldowns.
+- **Tech Stack:** Python 3.11+, python-telegram-bot v21+, SQLAlchemy 2.0 (Async SQLite & PostgreSQL), Docker, Wasmer.
+- **Source Code:** [github.com/mrsehajofficial/aegis](https://github.com/mrsehajofficial/aegis)
+- **Live Showcase:** [aegis.wasmer.app](https://aegis.wasmer.app/)
+
+### 02. Amai Yuki — Real-Time Messaging App
 **Cross-platform real-time messaging application with integrated LLM chat workflows.**
 
 - **Overview:** Engineered a custom real-time messaging application featuring direct and group conversations, custom protocol layer, and an integrated in-app camera module.

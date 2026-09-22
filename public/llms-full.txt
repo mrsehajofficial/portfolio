@@ -19,7 +19,25 @@ Sehaj automates the boring parts, wires up LLM agents, and ships backends that h
 
 Hero intro: "I'm Sehaj Varma — an AI automation and backend engineer from India. I build Python/Flask APIs, LLM agents, RAG pipelines, and the scripts that quietly do the work nobody wants to do twice."
 
-### Selected work: Amai Yuki
+### Selected work
+
+#### 01 — Aegis: Telegram Group Management & Business Bot
+
+Production-grade Telegram group management bot & business automation suite.
+
+The problem: running active Telegram communities and business chats usually means cobbling together multiple third-party bots, losing control over rate limits, data privacy, and auto-replies. Sehaj wanted deterministic protection, sliding-window anti-flood, and automated business workflows under one tight, async Python architecture.
+
+Build log:
+- Asynchronous Python 3.11+ event loop built on python-telegram-bot v21+ and SQLAlchemy 2.0 with async engine support (aiosqlite & asyncpg).
+- Real-time protection engine: sliding-window rate limits per user, regex anti-spam, blacklists, and progressive warnings.
+- Telegram Business automation: private chat auto-replies, greeting responders, out-of-office fallbacks with cooldown timers, and loop guards.
+- Interactive terminal setup wizard (python -m app.setup), role-based administration, in-chat /biz inline dashboard, and Docker containerization.
+
+The result: fully open-source under AGPL v3 with CI test workflows, multi-database support (SQLite & PostgreSQL), and a live web showcase deployed on Wasmer.
+Source code: https://github.com/mrsehajofficial/aegis | Live showcase: https://aegis.wasmer.app/
+Tags: Python, AsyncIO, python-telegram-bot, SQLAlchemy, Automation, Wasmer. Year: 2026.
+
+#### 02 — Amai Yuki: Real-Time Messaging App
 
 A real-time messaging app, from zero to shipped.
 

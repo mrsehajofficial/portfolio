@@ -18,6 +18,7 @@ export const SAME_AS = [
   PERSON.linkedin,
   PERSON.instagram,
   PERSON.githubRepo,
+  PERSON.githubRepoAmaiYuki,
 ];
 
 /** The shared Person node — spread into any page's @graph. */

@@ -590,7 +590,7 @@ h1, h2, h3 {
 .plate-actions {
   display: flex;
   align-items: center;
-  gap: 26px;
+  gap: 20px;
   flex-wrap: wrap;
   margin-top: 26px;
 }
@@ -610,12 +610,26 @@ h1, h2, h3 {
   border-color: var(--vermilion);
   color: var(--paper);
 }
+.plate-source.live-pill {
+  border-color: var(--vermilion);
+  color: var(--vermilion);
+}
+.plate-source.live-pill:hover {
+  background: var(--vermilion);
+  color: var(--paper);
+}
 .plate-year {
   font-family: var(--font-mono);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--plate-faint);
+}
+
+.spread + .spread {
+  margin-top: clamp(64px, 10vh, 120px);
+  padding-top: clamp(48px, 8vh, 90px);
+  border-top: 1px dashed var(--plate-rule);
 }
 
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }

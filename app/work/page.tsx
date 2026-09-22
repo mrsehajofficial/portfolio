@@ -3,19 +3,19 @@ import Link from "next/link";
 import PressNav from "@/components/PressNav";
 import PressFooter from "@/components/PressFooter";
 import CurtainReveal from "@/components/CurtainReveal";
-import { FLAGSHIP, EVIDENCE, PERSON } from "@/lib/content";
+import { PROJECTS, EVIDENCE, PERSON } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AI, Python & Backend Projects — Case Studies",
+  title: "AI, Python & Telegram Projects — Case Studies",
   description:
-    "The full Amai Yuki case study — Python/Flask backend, Flutter frontend, LLM features — plus the automation and RAG work behind the numbers.",
+    "Detailed engineering case studies for Aegis (Telegram group management & business bot) and Amai Yuki (real-time messaging app), plus automation and RAG work.",
   alternates: { canonical: `${SITE_URL}work` },
   openGraph: {
     type: "website",
-    title: "AI, Python & Backend Projects — Case Studies — Sehaj Varma",
+    title: "AI, Python & Telegram Projects — Case Studies — Sehaj Varma",
     description:
-      "The full Amai Yuki case study — Python/Flask backend, Flutter frontend, LLM features — plus the automation and RAG work behind the numbers.",
+      "Detailed engineering case studies for Aegis (Telegram group management & business bot) and Amai Yuki (real-time messaging app), plus automation and RAG work.",
     url: `${SITE_URL}work`,
     images: [
       {
@@ -30,37 +30,15 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareSourceCode",
-  name: "Amai Yuki",
-  description:
-    "Cross-platform real-time messaging application with a Python/Flask backend and Flutter frontend, including direct/group chats and a custom in-app camera module.",
-  codeRepository: PERSON.githubRepo,
-  programmingLanguage: ["Dart", "Python", "TypeScript"],
-  author: { "@type": "Person", name: PERSON.name, url: SITE_URL },
+  "@graph": PROJECTS.map((project) => ({
+    "@type": "SoftwareSourceCode",
+    name: project.title,
+    description: project.subtitle,
+    codeRepository: project.sourceUrl,
+    programmingLanguage: project.tags,
+    author: { "@type": "Person", name: PERSON.name, url: SITE_URL },
+  })),
 };
-
-const BUILD_BLOCKS: { label: string; body: string }[] = [
-  {
-    label: "flask rest backend on sqlite",
-    body: "A modular Python/Flask REST API with SQLite persistence and input validation on every route. The first version skipped validation — one bad payload taught me that lesson permanently. Documentation thorough enough that future collaborators never have to ask.",
-  },
-  {
-    label: "direct & group chat flows",
-    body: "Real-time messaging over the project's own protocol layer instead of someone else's. That's the load-bearing decision: it's the reason latency and data flow stay mine to control.",
-  },
-  {
-    label: "custom in-app camera module",
-    body: "A capture module built directly into the Flutter frontend — the kind of feature off-the-shelf messaging backends simply don't expose, and the reason the app had to own the frontend too.",
-  },
-  {
-    label: "provider-based state architecture",
-    body: "Clean Provider-based state across the frontend so chat, camera, and LLM-feature state stay predictable as the app grows. Boring on purpose; boring is what survives.",
-  },
-  {
-    label: "llm integrations in chat",
-    body: "OpenAI & Gemini wired into chat workflows via prompt orchestration. The goal isn't a flashy demo — it's an LLM feature that behaves the same on a Tuesday afternoon as it did on launch day.",
-  },
-];
 
 export default function WorkPage() {
   return (
@@ -70,16 +48,16 @@ export default function WorkPage() {
       <section className="page-head">
         <div className="container">
           <CurtainReveal>
-            <p className="page-eyebrow mono">Form 02 — case study</p>
+            <p className="page-eyebrow mono">Form 02 — case studies</p>
             <h1 className="page-h1">
-              {FLAGSHIP.title} — from zero to{" "}
+              Production systems — from zero to{" "}
               <em className="accent-over">shipped.</em>
             </h1>
             <p className="lead">
-              The full story of {FLAGSHIP.title}: a cross-platform real-time
-              messaging app. This is the engineering narrative with the
-              decisions, the tradeoffs, and the parts that didn&rsquo;t work
-              the first time.
+              The full engineering stories behind Aegis (Telegram group management
+              &amp; business automation) and Amai Yuki (cross-platform real-time
+              messaging). The architectural decisions, tradeoffs, and parts that
+              didn&rsquo;t work the first time.
             </p>
           </CurtainReveal>
         </div>
@@ -87,64 +65,94 @@ export default function WorkPage() {
 
       <section className="page-body">
         <div className="container">
-          <CurtainReveal>
-            <p className="form-eyebrow mono" style={{ color: "var(--ink-50)" }}>
-              the problem
-            </p>
-            <h2 className="group-h2" style={{ marginTop: 16 }}>
-              Why build your own messaging backend?
-            </h2>
-            <p className="section-body" style={{ marginTop: 18 }}>
-              {FLAGSHIP.problem}
-            </p>
-          </CurtainReveal>
-
-          <CurtainReveal delay={0.05}>
-            <p
-              className="form-eyebrow mono"
-              style={{ color: "var(--ink-50)", marginTop: 56 }}
+          {PROJECTS.map((project, idx) => (
+            <div
+              key={project.id}
+              id={project.id}
+              style={{
+                marginTop: idx > 0 ? 80 : 0,
+                paddingTop: idx > 0 ? 60 : 0,
+                borderTop: idx > 0 ? "1px dashed var(--ink-20)" : "none",
+              }}
             >
-              the build blocks
-            </p>
-            {BUILD_BLOCKS.map((block) => (
-              <div className="group-row" key={block.label}>
-                <h3 className="group-h2">{block.label}</h3>
-                <p className="section-body" style={{ marginTop: 12 }}>
-                  {block.body}
+              <CurtainReveal>
+                <p className="form-eyebrow mono" style={{ color: "var(--ink-50)" }}>
+                  project {project.projectNo} — {project.title.toLowerCase()}
                 </p>
-              </div>
-            ))}
-          </CurtainReveal>
+                <h2 className="group-h2" style={{ marginTop: 16 }}>
+                  {project.title}: {project.subtitle}
+                </h2>
+                <p className="case-label mono" style={{ marginTop: 24 }}>
+                  the problem
+                </p>
+                <p className="section-body" style={{ marginTop: 12 }}>
+                  {project.problem}
+                </p>
+              </CurtainReveal>
 
-          <CurtainReveal delay={0.05}>
-            <p
-              className="form-eyebrow mono"
-              style={{ color: "var(--ink-50)", marginTop: 44 }}
-            >
-              the result
-            </p>
-            <div className="plate-card crop" style={{ marginTop: 16 }}>
-              <h3>{FLAGSHIP.title}</h3>
-              <p>{FLAGSHIP.result}</p>
-              <div className="tag-row" style={{ marginTop: 18 }}>
-                {FLAGSHIP.tags.map((t) => (
-                  <span className="pill" key={t}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <a
-                href={FLAGSHIP.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor-hover
-                className="source-link"
-                style={{ display: "inline-block", marginTop: 22 }}
-              >
-                view source ↗
-              </a>
+              {project.buildBlocks && (
+                <CurtainReveal delay={0.05}>
+                  <p
+                    className="case-label mono"
+                    style={{ marginTop: 44 }}
+                  >
+                    the build blocks
+                  </p>
+                  {project.buildBlocks.map((block) => (
+                    <div className="group-row" key={block.label}>
+                      <h3 className="group-h2">{block.label}</h3>
+                      <p className="section-body" style={{ marginTop: 12 }}>
+                        {block.body}
+                      </p>
+                    </div>
+                  ))}
+                </CurtainReveal>
+              )}
+
+              <CurtainReveal delay={0.05}>
+                <p
+                  className="case-label mono"
+                  style={{ marginTop: 44 }}
+                >
+                  the result
+                </p>
+                <div className="plate-card crop" style={{ marginTop: 16 }}>
+                  <h3>{project.title}</h3>
+                  <p>{project.result}</p>
+                  <div className="tag-row" style={{ marginTop: 18 }}>
+                    {project.tags.map((t) => (
+                      <span className="pill" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", gap: 16, marginTop: 22, flexWrap: "wrap" }}>
+                    <a
+                      href={project.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor-hover
+                      className="source-link"
+                    >
+                      view source ↗
+                    </a>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor-hover
+                        className="source-link"
+                        style={{ color: "var(--vermilion)" }}
+                      >
+                        live showcase ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </CurtainReveal>
             </div>
-          </CurtainReveal>
+          ))}
 
           <CurtainReveal delay={0.1}>
             <p

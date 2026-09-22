@@ -28,7 +28,23 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
     title: "Capabilities at a glance",
     keywords: ["stack", "tech", "technology", "tools", "technologies", "skills", "experience"],
     summary:
-      "Five capability groups: AI (OpenAI · Gemini · RAG · Agents · Prompt orchestration), Backend (Python · Flask · REST APIs · SQLite), Automation (Python scripting · Scheduled jobs · File processing · API integrations), Frontend (HTML · CSS · JavaScript · Flutter · Dart), and Deployment (Vercel · Netlify · Render · Wasmer).",
+      "Five capability groups: AI (OpenAI · Gemini · RAG · Agents · Prompt orchestration), Backend (Python · Flask · REST APIs · SQLite · SQLAlchemy · AsyncIO), Automation (Telegram Bots · Python scripting · Scheduled jobs · File processing · API integrations), Frontend (HTML · CSS · JavaScript · Flutter · Dart), and Deployment (Wasmer · Vercel · Netlify · Render · Docker).",
+  },
+  {
+    id: "aegis",
+    title: "Aegis — Telegram Group Management Bot",
+    keywords: [
+      "aegis", "telegram", "bot", "bots", "moderation", "group", "management",
+      "antispam", "flood", "business", "sqlalchemy", "asyncio", "python", "project",
+    ],
+    summary:
+      "A production-grade Telegram group management bot and business automation system: async Python 3.11+ architecture using python-telegram-bot v21+ and SQLAlchemy 2.0 (aiosqlite & asyncpg). Features sliding-window anti-flood protection, anti-spam, auto-warns, and Telegram Business auto-replies.",
+    detail:
+      "Open-source under AGPL v3 with CI test workflows, Docker support, and a live web showcase deployed on Wasmer.",
+    links: [
+      { label: "View Aegis on GitHub ↗", href: "https://github.com/mrsehajofficial/aegis" },
+      { label: "Live Showcase on Wasmer ↗", href: "https://aegis.wasmer.app/" },
+    ],
   },
   {
     id: "ai-work",
@@ -40,7 +56,7 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
     summary:
       "Sehaj works with OpenAI and Gemini APIs, engineers prompts and system context for reliable LLM outputs, studies RAG (Retrieval-Augmented Generation) architectures, and is building conversational agents that connect LLMs to external APIs.",
     detail:
-      "The applied example is Amai Yuki's LLM-assisted features plus the automation scripts he writes day-to-day.",
+      "The applied example is Amai Yuki's LLM-assisted features plus the automation scripts and Telegram bots he writes.",
   },
   {
     id: "amai-yuki",
@@ -61,22 +77,22 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
     id: "backend",
     title: "Backend engineering",
     keywords: [
-      "backend", "python", "flask", "rest", "api", "apis", "sqlite",
+      "backend", "python", "flask", "rest", "api", "apis", "sqlite", "sqlalchemy", "asyncio",
       "database", "schema", "validation",
     ],
     summary:
-      "Structured REST APIs in Flask on clean SQLite schemas — modular codebases, input validation, and documentation thorough enough that future collaborators can read them without asking questions.",
+      "Structured REST APIs in Flask and asynchronous Python engines with SQLAlchemy ORM on clean SQLite/PostgreSQL schemas — modular codebases, input validation, and documentation thorough enough that future collaborators can read them without asking questions.",
   },
   {
     id: "automation",
     title: "Automation work",
     keywords: [
-      "automation", "automate", "scripts", "scripting", "scheduled", "jobs",
+      "automation", "automate", "scripts", "scripting", "telegram", "bot", "bots", "scheduled", "jobs",
       "cron", "file", "files", "processing", "workflow", "workflows",
       "integration",
     ],
     summary:
-      "Sehaj builds Python automation scripts that turn repetitive file, API, and data-processing workflows into repeatable processes: scheduled jobs, file pipelines, and API-to-API integrations.",
+      "Sehaj builds Telegram bots like Aegis and Python automation scripts that turn repetitive workflows into repeatable processes: scheduled jobs, file pipelines, and API-to-API integrations.",
   },
   {
     id: "frontend",
@@ -93,10 +109,10 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
     title: "Deployment & hosting",
     keywords: [
       "deployment", "deploy", "hosting", "hosted", "vercel", "netlify",
-      "render", "wasmer", "platforms", "cloud",
+      "render", "wasmer", "docker", "platforms", "cloud",
     ],
     summary:
-      "Static sites and backend prototypes deployed across Vercel, Netlify, Render, and Wasmer — this very portfolio is one of them.",
+      "Static sites, backend prototypes, and live Telegram bot showcases deployed across Wasmer, Vercel, Netlify, and Render — this very portfolio and Aegis are live on Wasmer.",
   },
   {
     id: "contact",
@@ -109,7 +125,7 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
     summary:
       "Email mr.sehaj.official@gmail.com or find him at github.com/mrsehajofficial. Based in India, open to remote work worldwide.",
     detail:
-      "Currently available for: AI automation · Python backends · API integration · freelance projects.",
+      "Currently available for: AI automation · Python backends · Telegram bots · API integration · freelance projects.",
     links: [
       { label: "mr.sehaj.official@gmail.com", href: "mailto:mr.sehaj.official@gmail.com" },
       { label: "github.com/mrsehajofficial ↗", href: "https://github.com/mrsehajofficial" },
@@ -134,8 +150,10 @@ const SYNONYMS: Record<string, string[]> = {
   llm: ["ai"],
   gpt: ["openai"],
   bard: ["gemini"],
-  bot: ["agents"],
-  chatbot: ["agents", "messaging"],
+  bot: ["agents", "telegram", "aegis"],
+  chatbot: ["agents", "messaging", "telegram", "aegis"],
+  telegram: ["aegis", "bot", "moderation"],
+  aegis: ["telegram", "bot"],
   chat: ["messaging"],
   chats: ["messaging"],
   messaging: ["chat"],
@@ -149,12 +167,12 @@ const SYNONYMS: Record<string, string[]> = {
   cost: ["contact"],
   price: ["contact"],
   flask: ["python", "backend"],
-  python: ["automation"],
+  python: ["automation", "backend"],
   api: ["integrations"],
   apis: ["integrations"],
-  db: ["sqlite"],
-  sql: ["sqlite"],
-  database: ["sqlite", "schema"],
+  db: ["sqlite", "sqlalchemy"],
+  sql: ["sqlite", "sqlalchemy"],
+  database: ["sqlite", "sqlalchemy", "schema"],
   deploy: ["deployment"],
   hosting: ["deployment"],
   cloud: ["deployment"],
@@ -162,7 +180,8 @@ const SYNONYMS: Record<string, string[]> = {
   website: ["frontend", "deployment"],
   cv: ["contact", "capabilities"],
   resume: ["contact", "capabilities"],
-  project: ["projects"],
+  project: ["projects", "aegis", "amai"],
+  projects: ["aegis", "amai"],
   apps: ["app"],
   script: ["scripts"],
 };

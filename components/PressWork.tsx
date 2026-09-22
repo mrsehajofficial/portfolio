@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef } from "react";
 import CurtainReveal from "./CurtainReveal";
-import { FLAGSHIP, EVIDENCE, PERSON } from "@/lib/content";
+import { PROJECTS, EVIDENCE, PERSON } from "@/lib/content";
 import { onIdleAsync, loadGsap } from "@/lib/idle";
 import { SITE_URL } from "@/lib/site";
 
@@ -15,7 +15,7 @@ const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
- * PressWork — the flagship case study on the inverted ink-density sheet.
+ * PressWork — the flagship case studies on the inverted ink-density sheet.
  * GSAP is code-split and set up only after idle: it scrubs the build log in
  * one-by-one, fills the vermilion ink bar, and parallaxes the ghost form
  * number — all fromTo with immediateRender:false, so every element is
@@ -120,71 +120,86 @@ export default function PressWork() {
             <div>
               <p className="form-eyebrow mono">Form 02 — selected work</p>
               <h2 className="section-title">
-                A project built from scratch,{" "}
+                Projects built from scratch,{" "}
                 <em className="accent-over">end to end.</em>
               </h2>
             </div>
             <p className="section-note">
-              Proof over promises — one flagship product shipped end to end,
+              Proof over promises — flagship systems shipped end to end,
               plus the automation and AI work behind the numbers.
             </p>
           </header>
         </CurtainReveal>
 
-        <div className="spread">
-          <div className="form-no" aria-hidden="true">
-            {FLAGSHIP.formNo}
-          </div>
+        <div className="projects-spread-wrap">
+          {PROJECTS.map((project) => (
+            <div className="spread" key={project.id} id={`project-${project.id}`}>
+              <div className="form-no" aria-hidden="true">
+                {project.projectNo}
+              </div>
 
-          <div>
-            <h3 className="case-title">{FLAGSHIP.title}</h3>
-            <p className="case-sub">{FLAGSHIP.subtitle}</p>
+              <div>
+                <h3 className="case-title">{project.title}</h3>
+                <p className="case-sub">{project.subtitle}</p>
 
-            <p className="case-label mono">01 — the problem</p>
-            <p className="case-body">{FLAGSHIP.problem}</p>
+                <p className="case-label mono">01 — the problem</p>
+                <p className="case-body">{project.problem}</p>
 
-            <p className="case-label mono">02 — build log</p>
-            <div className="buildlog">
-              {FLAGSHIP.built.map((line, i) => (
-                <div className="buildlog-item" key={line}>
-                  <span className="buildlog-num mono">
-                    step {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p>{line}</p>
+                <p className="case-label mono">02 — build log</p>
+                <div className="buildlog">
+                  {project.built.map((line, i) => (
+                    <div className="buildlog-item" key={line}>
+                      <span className="buildlog-num mono">
+                        step {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <p>{line}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            <p className="case-label mono">03 — the result</p>
-            <p className="case-body">{FLAGSHIP.result}</p>
+                <p className="case-label mono">03 — the result</p>
+                <p className="case-body">{project.result}</p>
 
-            <div className="tag-row">
-              {FLAGSHIP.tags.map((t) => (
-                <span className="tag" key={t}>
-                  {t}
-                </span>
-              ))}
-            </div>
+                <div className="tag-row">
+                  {project.tags.map((t) => (
+                    <span className="tag" key={t}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
 
-            <div className="plate-actions">
-              <a
-                href={FLAGSHIP.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor-hover
-                className="plate-source"
-              >
-                view source ↗
-              </a>
-              <span className="plate-year mono">
-                shot &amp; shipped {FLAGSHIP.year}
-              </span>
-            </div>
+                <div className="plate-actions">
+                  <a
+                    href={project.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor-hover
+                    className="plate-source"
+                  >
+                    view source ↗
+                  </a>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor-hover
+                      className="plate-source live-pill"
+                    >
+                      live showcase ↗
+                    </a>
+                  )}
+                  <span className="plate-year mono">
+                    shot &amp; shipped {project.year}
+                  </span>
+                </div>
 
-            <div className="ink-bar" aria-hidden="true">
-              <div className="ink-bar-fill" />
+                <div className="ink-bar" aria-hidden="true">
+                  <div className="ink-bar-fill" />
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
 
         <CurtainReveal className="ev-wrap">
@@ -200,20 +215,21 @@ export default function PressWork() {
         </CurtainReveal>
       </div>
 
-      {/* Structured data so search engines attribute the repo properly. */}
+      {/* Structured data so search engines attribute the repositories properly. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareSourceCode",
-            name: "Amai Yuki",
-            description:
-              "Cross-platform real-time messaging application with a Python/Flask backend and Flutter frontend, including direct/group chats and a custom in-app camera module.",
-            codeRepository: PERSON.githubRepo,
-            programmingLanguage: ["Dart", "Python", "TypeScript"],
-            author: { "@type": "Person", name: PERSON.name, url: SITE_URL },
-          }),
+          __html: JSON.stringify(
+            PROJECTS.map((project) => ({
+              "@context": "https://schema.org",
+              "@type": "SoftwareSourceCode",
+              name: project.title,
+              description: project.subtitle,
+              codeRepository: project.sourceUrl,
+              programmingLanguage: project.tags,
+              author: { "@type": "Person", name: PERSON.name, url: SITE_URL },
+            }))
+          ),
         }}
       />
     </section>
