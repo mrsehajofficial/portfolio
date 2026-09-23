@@ -149,16 +149,30 @@ h1, h2, h3 {
 
 /* The brand as an embossed stamp */
 .brand-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-display);
   font-size: 19px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1;
-  padding: 6px 10px 5px;
+  padding: 5px 10px 5px 6px;
   border: 1px solid var(--ink);
-  transition: background 0.25s var(--ease-press), color 0.25s var(--ease-press);
+  transition: background 0.25s var(--ease-press), color 0.25s var(--ease-press), border-color 0.25s var(--ease-press);
+}
+.brand-stamp .brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: transform 0.25s var(--ease-press);
 }
 .brand-stamp:hover { background: var(--ink); color: var(--paper); }
+.brand-stamp:hover .brand-mark {
+  color: var(--paper);
+  transform: rotate(-3deg) scale(1.05);
+}
 
 .nav-links { display: flex; gap: 30px; align-items: center; }
 

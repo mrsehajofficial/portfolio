@@ -100,8 +100,17 @@ export default function PressNav() {
             }}
             data-cursor-hover
             className="brand-stamp"
+            aria-label={`${PERSON.name} Home`}
           >
-            {PERSON.shortName}.varma
+            <span className="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="6" fill="currentColor" />
+                <path d="M 20 10.7 C 19 9.2 17.2 8.5 14.7 8.5 C 11.2 8.5 9 10.2 9 13 C 9 17.2 17.5 16 17.5 20 C 17.5 21.7 15.9 23 13.2 23 C 10.6 23 8.7 21.5 7.7 19.7" stroke="#f2efe8" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M 16.5 13.2 L 21.7 23.2 L 26.5 13.2" stroke="#d6401f" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="21.7" cy="9" r="1.2" fill="#d6401f" />
+              </svg>
+            </span>
+            <span className="brand-name">{PERSON.shortName}.varma</span>
           </Link>
 
           <div className="nav-links">

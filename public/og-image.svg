@@ -1,266 +1,258 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <!-- Core palette from favicon -->
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#080809"/>
-      <stop offset="55%" stop-color="#0a0a0b"/>
-      <stop offset="100%" stop-color="#0d0f0e"/>
+    <!-- Paper stock texture and subtle vignette -->
+    <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7f5ef" />
+      <stop offset="60%" stop-color="#f2efe8" />
+      <stop offset="100%" stop-color="#e7e1d2" />
     </linearGradient>
 
-    <linearGradient id="greenLine" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3ecf8e" stop-opacity="0"/>
-      <stop offset="35%" stop-color="#3ecf8e" stop-opacity=".9"/>
-      <stop offset="100%" stop-color="#3ecf8e" stop-opacity="0"/>
+    <!-- Faint ink-press rule gradient -->
+    <linearGradient id="vermilionFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d6401f" stop-opacity="1" />
+      <stop offset="85%" stop-color="#d6401f" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#d6401f" stop-opacity="0" />
     </linearGradient>
 
-    <radialGradient id="greenGlow">
-      <stop offset="0%" stop-color="#3ecf8e" stop-opacity=".14"/>
-      <stop offset="100%" stop-color="#3ecf8e" stop-opacity="0"/>
-    </radialGradient>
-
-    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="35"/>
-    </filter>
-
-    <filter id="tinyGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="8"/>
+    <!-- Halftone / fine grain noise filter pattern for authentic paper tooth -->
+    <filter id="paperTexture" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.035 0" />
+      <feBlend mode="multiply" in2="SourceGraphic" />
     </filter>
   </defs>
 
-  <!-- =====================================================
-       BACKGROUND
-       ===================================================== -->
+  <!-- 1. BASE PAPER STOCK -->
+  <rect width="1200" height="630" fill="url(#paperGrad)" />
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
-
-  <!-- Extremely subtle cinematic light -->
-  <ellipse
-    cx="1040"
-    cy="80"
-    rx="420"
-    ry="300"
-    fill="url(#greenGlow)"
-  />
-
-  <ellipse
-    cx="1060"
-    cy="90"
-    rx="150"
-    ry="120"
-    fill="#3ecf8e"
-    opacity=".035"
-    filter="url(#softGlow)"
-  />
-
-  <!-- Subtle vignette -->
-  <rect
-    width="1200"
-    height="630"
-    fill="none"
-    stroke="#000000"
-    stroke-width="80"
-    opacity=".18"
-  />
-
-  <!-- =====================================================
-       SIGNATURE MOTIF
-       A restrained interpretation of </> rather than
-       simply displaying the favicon.
-       ===================================================== -->
-
-  <g transform="translate(1010 72)">
-
-    <!-- tiny green point -->
-    <circle
-      cx="0"
-      cy="0"
-      r="3"
-      fill="#3ecf8e"
-    />
-
-    <!-- signature line -->
-    <path
-      d="M 0 0
-         C 42 0, 70 10, 92 30
-         C 112 48, 130 58, 164 58"
-      fill="none"
-      stroke="#3ecf8e"
-      stroke-width="1"
-      opacity=".55"
-    />
-
-    <!-- subtle code-inspired marks -->
-    <path
-      d="M 112 38 L 128 58 L 112 78"
-      fill="none"
-      stroke="#3ecf8e"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      opacity=".8"
-    />
-
-    <path
-      d="M 145 38 L 129 78"
-      fill="none"
-      stroke="#3ecf8e"
-      stroke-width="2"
-      stroke-linecap="round"
-      opacity=".55"
-    />
-
+  <!-- 2. WORKBENCH & REGISTER GRID (Subtle letterpress layout lines) -->
+  <g opacity="0.18" stroke="#17130d" stroke-width="1">
+    <!-- Outer bleed margin marks -->
+    <line x1="56" y1="20" x2="56" y2="610" stroke-dasharray="2 6" />
+    <line x1="1144" y1="20" x2="1144" y2="610" stroke-dasharray="2 6" />
+    <line x1="20" y1="56" x2="1180" y2="56" stroke-dasharray="2 6" />
+    <line x1="20" y1="574" x2="1180" y2="574" stroke-dasharray="2 6" />
   </g>
 
-  <!-- =====================================================
-       TOP MICRO IDENTITY
-       ===================================================== -->
+  <!-- 3. PRINTER'S REGISTRATION MARKS (Corners & Center Ticks) -->
+  <!-- Top-left crop -->
+  <g stroke="#17130d" stroke-width="1.2" opacity="0.45">
+    <line x1="36" y1="56" x2="56" y2="56" />
+    <line x1="56" y1="36" x2="56" y2="56" />
+    <circle cx="56" cy="56" r="3" fill="none" />
+  </g>
+  <!-- Top-right crop -->
+  <g stroke="#17130d" stroke-width="1.2" opacity="0.45">
+    <line x1="1144" y1="56" x2="1164" y2="56" />
+    <line x1="1144" y1="36" x2="1144" y2="56" />
+    <circle cx="1144" cy="56" r="3" fill="none" />
+  </g>
+  <!-- Bottom-left crop -->
+  <g stroke="#17130d" stroke-width="1.2" opacity="0.45">
+    <line x1="36" y1="574" x2="56" y2="574" />
+    <line x1="56" y1="574" x2="56" y2="594" />
+    <circle cx="56" cy="574" r="3" fill="none" />
+  </g>
+  <!-- Bottom-right crop -->
+  <g stroke="#17130d" stroke-width="1.2" opacity="0.45">
+    <line x1="1144" y1="574" x2="1164" y2="574" />
+    <line x1="1144" y1="574" x2="1144" y2="594" />
+    <circle cx="1144" cy="574" r="3" fill="none" />
+  </g>
 
-  <text
-    x="82"
-    y="78"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="15"
-    font-weight="600"
-    letter-spacing="4"
-    fill="#3ecf8e"
-  >
-    &lt;/&gt;
-  </text>
+  <!-- Vermilion Center Target -->
+  <g transform="translate(600, 36)" opacity="0.7">
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#d6401f" stroke-width="1" />
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#d6401f" stroke-width="1" />
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#d6401f" stroke-width="1" />
+    <circle cx="0" cy="0" r="2.5" fill="#d6401f" />
+  </g>
 
-  <text
-    x="125"
-    y="78"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="13"
-    font-weight="500"
-    letter-spacing="2"
-    fill="#666968"
-  >
-    PERSONAL PORTFOLIO
-  </text>
+  <!-- 4. TOP STATUS & SPECIMEN SLUG -->
+  <g transform="translate(84, 96)">
+    <!-- Form stamp tag -->
+    <rect x="0" y="0" width="138" height="26" fill="#17130d" />
+    <text x="69" y="17" 
+          font-family="'IBM Plex Mono', 'Courier New', monospace" 
+          font-size="11" 
+          font-weight="500" 
+          letter-spacing="2" 
+          fill="#f2efe8" 
+          text-anchor="middle">
+      FORM № 001/26
+    </text>
 
-  <!-- =====================================================
-       MAIN IDENTITY
-       ===================================================== -->
+    <!-- Category / Specimen Notes -->
+    <text x="156" y="17" 
+          font-family="'IBM Plex Mono', 'Courier New', monospace" 
+          font-size="12" 
+          font-weight="500" 
+          letter-spacing="2.5" 
+          fill="#17130d" 
+          opacity="0.65">
+      // SPECIMEN SHEET · PRODUCTION PROOF
+    </text>
 
-  <text
-    x="82"
-    y="280"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="72"
-    font-weight="700"
-    letter-spacing="-3"
-    fill="#f4f5f4"
-  >
-    Sehaj Varma
-  </text>
+    <!-- Geographic Origin / Availability -->
+    <text x="1032" y="17" 
+          font-family="'IBM Plex Mono', 'Courier New', monospace" 
+          font-size="12" 
+          font-weight="500" 
+          letter-spacing="2" 
+          fill="#d6401f" 
+          text-anchor="end">
+      INDIA · SHIPS WORLDWIDE ●
+    </text>
+  </g>
 
-  <!-- Accent underline / signature stroke -->
-  <path
-    d="M 84 306
-       C 150 314, 235 313, 340 307
-       C 405 303, 450 303, 495 305"
-    fill="none"
-    stroke="#3ecf8e"
-    stroke-width="2"
-    stroke-linecap="round"
-    opacity=".9"
-  />
+  <!-- Subtle Horizontal Rule under Header -->
+  <line x1="84" y1="138" x2="1116" y2="138" stroke="#17130d" stroke-width="1.5" opacity="0.14" />
 
-  <!-- =====================================================
-       ROLE
-       ===================================================== -->
+  <!-- 5. MAIN CONTENT BLOCK (LEFT) -->
+  <g transform="translate(84, 185)">
+    <!-- Artisan Name Stamp -->
+    <text x="0" y="70" 
+          font-family="'Anton', 'Impact', sans-serif" 
+          font-size="94" 
+          font-weight="400" 
+          letter-spacing="1.5" 
+          fill="#17130d">
+      SEHAJ VARMA
+    </text>
 
-  <text
-    x="84"
-    y="365"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="24"
-    font-weight="500"
-    letter-spacing=".2"
-    fill="#a7aaa8"
-  >
-    AI Automation Engineer
-  </text>
+    <!-- Vermilion letterpress bar under name -->
+    <rect x="2" y="92" width="220" height="5" fill="#d6401f" />
 
-  <text
-    x="84"
-    y="400"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="24"
-    font-weight="500"
-    letter-spacing=".2"
-    fill="#a7aaa8"
-  >
-    &amp; Backend Developer
-  </text>
+    <!-- Role / Discipline -->
+    <text x="2" y="148" 
+          font-family="'IBM Plex Mono', monospace" 
+          font-size="19" 
+          font-weight="600" 
+          letter-spacing="4" 
+          fill="#d6401f">
+      AI AUTOMATION &amp; BACKEND SYSTEMS
+    </text>
 
-  <!-- =====================================================
-       CINEMATIC DIVIDER
-       ===================================================== -->
+    <!-- Manifesto / Ethos (Crafted and human) -->
+    <text x="2" y="202" 
+          font-family="'Archivo', 'Helvetica Neue', Arial, sans-serif" 
+          font-size="22" 
+          font-weight="400" 
+          letter-spacing="0.2" 
+          line-height="1.4"
+          fill="#17130d" 
+          opacity="0.82">
+      Wiring intelligent LLM agents, resilient RAG pipelines,
+    </text>
+    <text x="2" y="235" 
+          font-family="'Archivo', 'Helvetica Neue', Arial, sans-serif" 
+          font-size="22" 
+          font-weight="400" 
+          letter-spacing="0.2" 
+          fill="#17130d" 
+          opacity="0.82">
+      and production Python backends that eliminate repetitive labor.
+    </text>
+  </g>
 
-  <rect
-    x="84"
-    y="452"
-    width="1032"
-    height="1"
-    fill="url(#greenLine)"
-  />
+  <!-- 6. RIGHT SIDE EMBOSSED EMBLEM / HANDCRAFTED WOODBLOCK SEAL -->
+  <g transform="translate(880, 180)">
+    <!-- Shadow plate -->
+    <rect x="6" y="6" width="230" height="230" fill="#ded8c8" rx="8" />
 
-  <!-- tiny accent -->
-  <circle
-    cx="84"
-    cy="452"
-    r="2"
-    fill="#3ecf8e"
-  />
+    <!-- Main deep ink plate -->
+    <rect x="0" y="0" width="230" height="230" fill="#17130d" rx="8" />
+    
+    <!-- Blind deboss outline -->
+    <rect x="10" y="10" width="210" height="210" fill="none" stroke="#f2efe8" stroke-width="1.5" stroke-opacity="0.2" rx="4" />
 
-  <!-- =====================================================
-       FOOTER
-       ===================================================== -->
+    <!-- Corner registration marks on emblem -->
+    <line x1="20" y1="20" x2="30" y2="20" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="20" y1="20" x2="20" y2="30" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="210" y1="20" x2="200" y2="20" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="210" y1="20" x2="210" y2="30" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="20" y1="210" x2="30" y2="210" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="20" y1="210" x2="20" y2="200" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="210" y1="210" x2="200" y2="210" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
+    <line x1="210" y1="210" x2="210" y2="200" stroke="#f2efe8" stroke-opacity="0.3" stroke-width="1" />
 
-  <text
-    x="84"
-    y="505"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="14"
-    font-weight="500"
-    letter-spacing="1.5"
-    fill="#5f6361"
-  >
-    BUILDING SYSTEMS • AUTOMATION • INTELLIGENT SOFTWARE
-  </text>
+    <!-- Large Handcrafted Interlocking SV Monogram -->
+    <!-- 'S' in warm paper ink -->
+    <path d="M 136 78 C 130 66 117 60 98 60 C 72 60 56 74 56 94 C 56 126 118 116 118 145 C 118 158 106 168 88 168 C 68 168 54 156 46 142" 
+          fill="none" 
+          stroke="#f2efe8" 
+          stroke-width="14" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
 
-  <text
-    x="1116"
-    y="505"
-    text-anchor="end"
-    font-family="Inter, Helvetica, Arial, sans-serif"
-    font-size="14"
-    font-weight="500"
-    fill="#3ecf8e"
-  >
-    sehaj.wasmer.app
-  </text>
+    <!-- 'V' in vibrant overprint vermilion ink -->
+    <path d="M 112 95 L 148 168 L 184 95" 
+          fill="none" 
+          stroke="#d6401f" 
+          stroke-width="14" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" />
 
-  <!-- =====================================================
-       SIGNATURE DOT
-       ===================================================== -->
+    <!-- Printer Registration Pip -->
+    <circle cx="148" cy="65" r="7" fill="#d6401f" />
 
-  <circle
-    cx="1116"
-    cy="552"
-    r="3"
-    fill="#3ecf8e"
-  />
+    <!-- Caption below monogram -->
+    <text x="115" y="202" 
+          font-family="'IBM Plex Mono', monospace" 
+          font-size="9" 
+          font-weight="500" 
+          letter-spacing="3" 
+          fill="#f2efe8" 
+          opacity="0.5" 
+          text-anchor="middle">
+      PRESS · MARK · ED. 26
+    </text>
+  </g>
 
-  <circle
-    cx="1116"
-    cy="552"
-    r="3"
-    fill="#3ecf8e"
-    opacity=".25"
-    filter="url(#tinyGlow)"
-  />
+  <!-- 7. BOTTOM BAR / SIGNATURE FOOTER -->
+  <!-- Horizontal divider -->
+  <line x1="84" y1="485" x2="1116" y2="485" stroke="#17130d" stroke-width="1.5" opacity="0.18" />
 
+  <g transform="translate(84, 528)">
+    <!-- Capability Pills / Focus Chips -->
+    <g transform="translate(0, 0)">
+      <!-- Chip 1 -->
+      <rect x="0" y="0" width="168" height="28" fill="#e4ded0" stroke="#17130d" stroke-width="1" stroke-opacity="0.25" />
+      <text x="84" y="18" font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#17130d" text-anchor="middle">
+        LLM AGENTS
+      </text>
+
+      <!-- Chip 2 -->
+      <rect x="180" y="0" width="168" height="28" fill="#e4ded0" stroke="#17130d" stroke-width="1" stroke-opacity="0.25" />
+      <text x="264" y="18" font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#17130d" text-anchor="middle">
+        RAG PIPELINES
+      </text>
+
+      <!-- Chip 3 -->
+      <rect x="360" y="0" width="176" height="28" fill="#e4ded0" stroke="#17130d" stroke-width="1" stroke-opacity="0.25" />
+      <text x="448" y="18" font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#17130d" text-anchor="middle">
+        TELEGRAM BOTS
+      </text>
+
+      <!-- Chip 4 -->
+      <rect x="548" y="0" width="160" height="28" fill="#e4ded0" stroke="#17130d" stroke-width="1" stroke-opacity="0.25" />
+      <text x="628" y="18" font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="600" letter-spacing="1" fill="#17130d" text-anchor="middle">
+        PYTHON / FLASK
+      </text>
+    </g>
+
+    <!-- Canonical URL with red accent mark -->
+    <g transform="translate(1032, 20)">
+      <circle cx="-160" cy="-2" r="3.5" fill="#d6401f" />
+      <text x="0" y="0" 
+            font-family="'IBM Plex Mono', monospace" 
+            font-size="14" 
+            font-weight="600" 
+            letter-spacing="1" 
+            fill="#17130d" 
+            text-anchor="end">
+        sehaj.wasmer.app
+      </text>
+    </g>
+  </g>
 </svg>
