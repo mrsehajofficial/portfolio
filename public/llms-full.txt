@@ -5,13 +5,18 @@ Full-text companion to llms.txt. Contains the complete, readable content of ever
 Sehaj Varma is an AI Automation Engineer and Backend Developer from India, open to remote work worldwide. He builds LLM agents, RAG pipelines, Python automation suites, and Flask backends that turn manual workflows into reliable software.
 
 ## Identity
-
-- Name: Sehaj Varma · Also known as: Sehaj
+- Name: Sehaj Varma
+- Also known as Sehaj 
+- Role: AI Automation Engineer & Backend Developer
+- Location: India — open to remote work worldwide
 - Email: mr.sehaj.official@gmail.com
-- GitHub: https://github.com/mrsehajofficial
+- GitHub: github.com/mrsehajofficial
 - LinkedIn: https://www.linkedin.com/in/mrsehajofficial/
 - Instagram: https://www.instagram.com/sehaj.varma.official/
-- Location: India — open to remote work worldwide
+- Flagship open-source projects:
+  - Aegis: https://github.com/mrsehajofficial/aegis (Live: https://aegis.wasmer.app/)
+  - Amai Yuki: https://github.com/mrsehajofficial/Amai-Yuki
+- Canonical origin: https://sehaj.wasmer.app/
 
 ## Home
 
@@ -94,6 +99,9 @@ Grouped by what is delivered, not by logo wall; everything is something shipped 
 
 - Email: mr.sehaj.official@gmail.com
 - GitHub: https://github.com/mrsehajofficial
+- Instagram: https://www.instagram.com/sehaj.varma.official/
+- LinkedIn: https://www.linkedin.com/in/mrsehajofficial/
+- Website: https://sehaj.wasmer.app/
 - Location: India · remote worldwide
 - Currently available for: AI automation, Python backends, API integration, freelance projects
 - Response time: replies within a day, usually faster
