@@ -26,3 +26,6 @@ npm-debug.log*
 
 # Host-specific
 .vercel
+
+AGENTS.md
+CLAUDE.md
