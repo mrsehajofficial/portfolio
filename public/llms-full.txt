@@ -57,7 +57,7 @@ Build log:
 
 The result: it works. The frontend is open-source and runnable today at https://github.com/mrsehajofficial/Amai-Yuki; the backend stays private, partly for security and partly because the early migrations embarrass Sehaj. Frontend polish moved faster with AI tooling — under his direction, not the other way around.
 
-Tags: Python, Flask, Provider, LLM, Flutter. Year: 2026.
+Tags: Python, Flask, Provider, LLM, Flutter. Year: 2026. 
 
 ### More evidence
 
