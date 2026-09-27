@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}faq`,
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-v2.png",
         width: 1200,
         height: 630,
         alt: "Sehaj Varma — AI Automation Engineer & Backend Developer Portfolio Banner",

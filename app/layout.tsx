@@ -64,13 +64,13 @@ export const metadata: Metadata = {
   publisher: PERSON.name,
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-v2.ico", sizes: "any" },
+      { url: "/favicon-v2.svg", type: "image/svg+xml" },
+      { url: "/icon-192-v2.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512-v2.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-v2.png", sizes: "180x180", type: "image/png" },
     ],
   },
   robots: {
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-v2.png",
         width: 1200,
         height: 630,
         alt: `${PERSON.name} — ${PERSON.role} Portfolio Banner`,
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og-image.png"],
+    images: ["/og-image-v2.png"],
   },
   alternates: { canonical: SITE_URL },
   category: "technology",
@@ -131,7 +131,9 @@ const jsonLd = {
     url: "https://sehaj.wasmer.app/",
     description:
       "AI Automation Engineer & Backend Developer from India. Builds Telegram bots (Aegis), LLM agents, RAG pipelines, Python backends, and real-time messaging apps (Amai Yuki). Specializing in prompt orchestration, workflow automation, and scalable systems.",
-    image: "https://sehaj.wasmer.app/og-image.svg",
+    disambiguatingDescription:
+      "AI Automation Engineer. Known on Instagram as @sehaj.varma.official. Not to be confused with Sehaj Verma (Senior Software Engineer at Motive), Sehaj Verma (Social Media Influencer @official_sehaj_verma), or Sahaj Verma (Cricketer).",
+    image: "https://sehaj.wasmer.app/og-image-v2.svg",
     email: "mr.sehaj.official@gmail.com",
     sameAs: [
       "https://github.com/mrsehajofficial",

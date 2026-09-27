@@ -31,7 +31,7 @@ export const personEntity = (overrides: Record<string, unknown> = {}) => ({
   alternateName: "Sehaj",
   identifier: PERSON.handle, // GitHub username
   url: SITE_URL,
-  image: `${SITE_URL}og-image.png`,
+  image: `${SITE_URL}og-image-v2.png`,
   jobTitle: PERSON.role,
   email: `mailto:${PERSON.email}`,
   address: {

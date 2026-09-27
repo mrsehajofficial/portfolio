@@ -32,20 +32,20 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       {
         // Master vector source of truth — scales to any tab/bookmark size.
-        src: "/favicon.svg",
+        src: "/favicon-v2.svg",
         sizes: "any",
         type: "image/svg+xml",
         purpose: "any",
       },
       // Standard Android/desktop raster renditions.
       {
-        src: "/icon-192.png",
+        src: "/icon-192-v2.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/icon-512.png",
+        src: "/icon-512-v2.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
@@ -53,13 +53,13 @@ export default function manifest(): MetadataRoute.Manifest {
       // Full-bleed art padded into the circle safe zone so Android launchers,
       // which mask icons aggressively, never crop the glyph
       {
-        src: "/icon-maskable-192.png",
+        src: "/icon-maskable-192-v2.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "maskable",
       },
       {
-        src: "/icon-maskable-512.png",
+        src: "/icon-maskable-512-v2.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
