@@ -10,6 +10,7 @@ const SUGGESTIONS = [
   "What AI projects has Sehaj built?",
   "What's his tech stack?",
   "Tell me about Amai Yuki",
+  "Tell me about the RAG Pipeline",
 ];
 
 /**

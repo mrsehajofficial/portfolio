@@ -9,7 +9,7 @@ import { personEntity } from "@/lib/entity";
 export const metadata: Metadata = {
   title: "About: AI Automation Engineer & Python Dev",
   description:
-    "How Sehaj works: AI automation, LLM integrations, Python backends — and what he's available for, from freelance projects to full-time roles.",
+    "How Sehaj works: AI automation, LLM integrations, RAG pipelines, Python backends — and what he's available for, from freelance projects to full-time roles.",
   alternates: { canonical: `${SITE_URL}about` },
   openGraph: {
     type: "website",

@@ -139,6 +139,7 @@ const jsonLd = {
       "https://github.com/mrsehajofficial",
       "https://github.com/mrsehajofficial/aegis",
       "https://github.com/mrsehajofficial/Amai-Yuki",
+      "https://github.com/mrsehajofficial/Rag-pipeline",
       "https://aegis.wasmer.app/",
       "https://www.linkedin.com/in/mrsehajofficial/",
       "https://www.instagram.com/sehaj.varma.official/",

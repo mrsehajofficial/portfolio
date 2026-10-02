@@ -9,13 +9,13 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "AI, Python & Telegram Projects — Case Studies",
   description:
-    "Detailed engineering case studies for Aegis (Telegram group management & business bot) and Amai Yuki (real-time messaging app), plus automation and RAG work.",
+    "Detailed engineering case studies for Aegis (Telegram group management & business bot), Amai Yuki (real-time messaging app), and RAG Pipeline (production-grade hybrid retrieval-augmented generation system), plus automation and AI work.",
   alternates: { canonical: `${SITE_URL}work` },
   openGraph: {
     type: "website",
     title: "AI, Python & Telegram Projects — Case Studies — Sehaj Varma",
     description:
-      "Detailed engineering case studies for Aegis (Telegram group management & business bot) and Amai Yuki (real-time messaging app), plus automation and RAG work.",
+      "Detailed engineering case studies for Aegis (Telegram group management & business bot), Amai Yuki (real-time messaging app), and RAG Pipeline (production-grade hybrid retrieval-augmented generation system), plus automation and AI work.",
     url: `${SITE_URL}work`,
     images: [
       {
@@ -55,8 +55,9 @@ export default function WorkPage() {
             </h1>
             <p className="lead">
               The full engineering stories behind Aegis (Telegram group management
-              &amp; business automation) and Amai Yuki (cross-platform real-time
-              messaging). The architectural decisions, tradeoffs, and parts that
+              &amp; business automation), Amai Yuki (cross-platform real-time
+              messaging), and RAG Pipeline (production-grade hybrid retrieval-augmented
+              generation). The architectural decisions, tradeoffs, and parts that
               didn&rsquo;t work the first time.
             </p>
           </CurtainReveal>

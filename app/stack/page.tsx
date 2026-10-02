@@ -9,7 +9,7 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Tech Stack: AI, Python, Flask, Flutter & More",
   description:
-    "Tools behind the work, grouped by delivery: AI (OpenAI, Gemini, RAG), Python/Flask backends, automation scripts, Flutter, and deployment.",
+    "Tools behind the work, grouped by delivery: AI (OpenAI, Gemini, RAG, FAISS), Python/Flask backends, WSGI/gunicorn, automation scripts, Flutter, and deployment.",
   alternates: { canonical: `${SITE_URL}stack` },
   openGraph: {
     type: "website",

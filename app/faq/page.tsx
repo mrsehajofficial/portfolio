@@ -8,13 +8,13 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "FAQ: Who is Sehaj Varma? What does he build?",
   description:
-    "Plain answers about who Sehaj Varma is, his tech stack, the Amai Yuki project, and how to hire him for AI automation, Python backends, and freelance work.",
+    "Plain answers about who Sehaj Varma is, his tech stack, the Aegis and Amai Yuki projects, the RAG Pipeline, and how to hire him for AI automation, Python backends, and freelance work.",
   alternates: { canonical: `${SITE_URL}faq` },
   openGraph: {
     type: "website",
     title: "FAQ: Who is Sehaj Varma? What does he build? — Sehaj Varma",
     description:
-      "Plain answers about who Sehaj Varma is, his tech stack, the Amai Yuki project, and how to hire him for AI automation, Python backends, and freelance work.",
+      "Plain answers about who Sehaj Varma is, his tech stack, the Aegis and Amai Yuki projects, the RAG Pipeline, and how to hire him for AI automation, Python backends, and freelance work.",
     url: `${SITE_URL}faq`,
     images: [
       {

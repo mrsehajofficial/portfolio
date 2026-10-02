@@ -59,6 +59,22 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
       "The applied example is Amai Yuki's LLM-assisted features plus the automation scripts and Telegram bots he writes.",
   },
   {
+    id: "rag-pipeline",
+    title: "RAG Pipeline — Production Retrieval-Augmented Generation",
+    keywords: [
+      "rag", "retrieval", "augmented", "generation", "pipeline", "bm25",
+      "faiss", "vector", "search", "embedding", "embeddings", "wsgi",
+      "gunicorn", "prometheus", "hybrid", "rrf", "rerank", "mmr",
+    ],
+    summary:
+      "A production-grade hybrid RAG pipeline: dense embeddings + BM25 sparse search fused with Reciprocal Rank Fusion, then reranked and diversified with MMR. Thread-safe caching, content-hash dedup, a WSGI adapter for gunicorn, API key auth, rate limiting, Prometheus metrics, and an optional FAISS backend for million-scale vector search.",
+    detail:
+      "Zero-dependency core runs fully offline with a hashing embedder and extractive LLM fallback — 80 tests pass deterministically with zero API spend. Open-source at github.com/mrsehajofficial/Rag-pipeline.",
+    links: [
+      { label: "View RAG Pipeline on GitHub ↗", href: "https://github.com/mrsehajofficial/Rag-pipeline" },
+    ],
+  },
+  {
     id: "amai-yuki",
     title: "Amai Yuki — Real-Time Messaging App",
     keywords: [

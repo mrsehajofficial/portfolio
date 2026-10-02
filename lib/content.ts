@@ -156,7 +156,50 @@ export const AMAI_YUKI: Project = {
   ],
 };
 
-export const PROJECTS: readonly Project[] = [AEGIS, AMAI_YUKI];
+export const RAG_PIPELINE: Project = {
+  id: "rag-pipeline",
+  projectNo: "03",
+  formNo: "03",
+  title: "RAG Pipeline",
+  subtitle: "Production-grade hybrid retrieval-augmented generation system",
+  problem:
+    "Most RAG projects are LangChain wrappers with no tests, no security, and no observability — they work in a demo and fall apart in production. I wanted a pipeline with real engineering: hybrid retrieval that actually finds the right chunks, thread-safe caching, graceful degradation when the LLM is down, and a deployment story that doesn't require a PhD in DevOps.",
+  built: [
+    "Hybrid retrieval: dense embeddings + BM25 sparse search fused with Reciprocal Rank Fusion, then reranked with a lexical-overlap scorer and diversified with Maximal Marginal Relevance — the full stack the literature recommends, not just a vector search.",
+    "Thread-safe everything: RLock-protected LRU caches, a lock-guarded BM25 index, content-hash dedup on ingest so re-indexing is idempotent, and streaming trace emission in a finally block so client disconnects don't swallow telemetry.",
+    "Production HTTP layer: a WSGI adapter that runs under gunicorn with sync workers, API key auth, path-injection guards, per-IP token-bucket rate limiting, a Prometheus /metrics endpoint, and graceful shutdown on SIGTERM.",
+    "Zero-dependency core: the entire pipeline runs offline with a hashing embedder and extractive LLM fallback — every test is deterministic, free, and runs in CI with zero API spend. Optional numpy and FAISS backends kick in when installed.",
+  ],
+  result:
+    "80 tests passing across 6 suites (unit, integration, security, WSGI contract, gunicorn smoke, FAISS), ruff-clean, 60%+ coverage enforced in CI. The architecture is honest about its limits — exact search up to ~500k chunks, single-node deployment — and the code documents every tradeoff at the decision point.",
+  tags: ["Python", "RAG", "BM25", "RRF", "FAISS", "WSGI", "gunicorn", "Prometheus"],
+  sourceUrl: "https://github.com/mrsehajofficial/Rag-pipeline",
+  year: "2026",
+  buildBlocks: [
+    {
+      label: "hybrid retrieval: dense + sparse + RRF",
+      body: "Dense embeddings and BM25 run in parallel, then fuse with Reciprocal Rank Fusion — rank-based fusion that's commensurable across methods with different score distributions. A lexical reranker with proximity and coverage scoring gets veto power over the fused order, and MMR diversifies so the context window isn't filled with six chunks saying the same thing.",
+    },
+    {
+      label: "thread-safe caching & dedup",
+      body: "Every LRU cache is bounded and RLock-protected. Ingest uses content-hash dedup so re-running a scheduled job doesn't double the index. The BM25 index has its own lock — concurrent ingest and query can't corrupt the postings. Streaming answers emit their trace in a finally block so a client disconnect mid-stream doesn't lose telemetry.",
+    },
+    {
+      label: "production WSGI server",
+      body: "A stdlib-only WSGI adapter that runs under gunicorn with sync workers — no framework dependency, no ASGI mismatch. API key auth with Bearer header or query param, path-injection guard on /ingest, per-IP token-bucket rate limiting, 1MB body cap, query length validation, and a Prometheus /metrics endpoint exposing cache hit rates and index size.",
+    },
+    {
+      label: "graceful degradation & offline mode",
+      body: "A hashing embedder and extractive LLM fallback mean the entire pipeline runs with zero API spend and zero nondeterminism. Every test is deterministic and free. The preflight embedding check turns a late 404 into an immediate, actionable error. The LLM response cache is SQLite-backed and survives restarts.",
+    },
+    {
+      label: "FAISS backend for scale",
+      body: "An optional FAISS IndexFlatIP backend behind the same VectorStore interface — swap it in when the corpus grows past ~500k chunks. The save/load format is compatible with the exact numpy store, so indexes are interchangeable. Thread-safe with RLock, supports metadata filtering, and persists in the same meta.json + chunks.jsonl + vectors.f32 format.",
+    },
+  ],
+};
+
+export const PROJECTS: readonly Project[] = [AEGIS, AMAI_YUKI, RAG_PIPELINE];
 export const FLAGSHIP: Project = AEGIS;
 
 export const EVIDENCE = [
@@ -203,13 +246,13 @@ export type Capability = { name: string; items: readonly string[]; where: string
 export const STACK: readonly Capability[] = [
   {
     name: "AI",
-    items: ["OpenAI", "Gemini", "RAG", "Agents", "Prompt orchestration"],
-    where: "OpenAI and Gemini integrations run inside Amai Yuki's chat features. Prompt orchestration is what keeps the outputs boring (in the good way). RAG architecture and agents that call external APIs are the current deep-dive — the goal is answers from real data, not confident guesses.",
+    items: ["OpenAI", "Gemini", "RAG", "FAISS", "Agents", "Prompt orchestration"],
+    where: "OpenAI and Gemini integrations run inside Amai Yuki's chat features. The RAG Pipeline is the current deep-dive: hybrid dense+sparse retrieval with RRF fusion, thread-safe caching, a WSGI adapter for gunicorn, and an optional FAISS backend for million-scale vector search. The goal is answers from real data, not confident guesses.",
   },
   {
     name: "Backend",
-    items: ["Python", "Flask", "REST APIs", "SQLite", "SQLAlchemy", "AsyncIO"],
-    where: "The pattern: Flask REST APIs and asynchronous Python bots (python-telegram-bot + SQLAlchemy) on SQLite or PostgreSQL schemas. Modular code, validation on every route, audit logs, and docs you can actually read. Aegis and Amai Yuki are the primary examples.",
+    items: ["Python", "Flask", "REST APIs", "SQLite", "SQLAlchemy", "AsyncIO", "WSGI"],
+    where: "The pattern: Flask REST APIs and asynchronous Python bots (python-telegram-bot + SQLAlchemy) on SQLite or PostgreSQL schemas. The RAG Pipeline adds a production WSGI layer under gunicorn with API key auth, rate limiting, and Prometheus metrics. Modular code, validation on every route, and docs you can actually read.",
   },
   {
     name: "Automation",
@@ -255,6 +298,11 @@ export const FAQS: readonly Faq[] = [
     question: "What is Amai Yuki?",
     answer:
       "A cross-platform real-time messaging app with direct and group chats, a custom in-app camera module, and Provider-based state architecture. Python/Flask backend with SQLite, Flutter/Dart frontend. The frontend is open-source and runnable today; the backend is private but fully functional.",
+  },
+  {
+    question: "What is the RAG Pipeline?",
+    answer:
+      "A production-grade hybrid retrieval-augmented generation system: dense embeddings + BM25 sparse search fused with Reciprocal Rank Fusion, then reranked and diversified with MMR. Thread-safe caching, content-hash dedup, a WSGI adapter for gunicorn, API key auth, rate limiting, Prometheus metrics, and an optional FAISS backend. Zero-dependency core runs fully offline — 80 tests pass deterministically with zero API spend. Open-source at github.com/mrsehajofficial/Rag-pipeline.",
   },
   {
     question: "What AI technologies does he work with?",

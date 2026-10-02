@@ -55,6 +55,15 @@ I am an **AI Automation Engineer & Backend Developer** from India, building soft
 - **Tech Stack:** Python & Flask (Backend), Flutter & Dart (Frontend), SQLite (Database), Provider (State Management).
 - **Source Code:** [github.com/mrsehajofficial/Amai-Yuki](https://github.com/mrsehajofficial/Amai-Yuki)
 
+### 03. RAG Pipeline — Production Retrieval-Augmented Generation
+**Production-grade hybrid RAG system with thread-safe caching, WSGI deployment, and zero-dependency offline mode.**
+
+- **Overview:** Built a complete RAG pipeline from scratch — hybrid dense+sparse retrieval, RRF fusion, reranking, MMR diversification, and a production HTTP layer. No LangChain wrapper; every component is hand-written and documented.
+- **Key Features:** Dense embeddings + BM25 fused with Reciprocal Rank Fusion, lexical reranker with proximity scoring, MMR diversification, thread-safe LRU caches, content-hash dedup, WSGI adapter for gunicorn, API key auth, per-IP rate limiting, Prometheus /metrics endpoint, graceful shutdown, optional FAISS backend for million-scale search.
+- **Quality:** 80 tests passing across 6 suites (unit, integration, security, WSGI contract, gunicorn smoke, FAISS), ruff-clean, 60%+ coverage enforced in CI, zero-dependency core runs fully offline.
+- **Tech Stack:** Python, WSGI, gunicorn, Prometheus, optional FAISS/numpy backends.
+- **Source Code:** [github.com/mrsehajofficial/Rag-pipeline](https://github.com/mrsehajofficial/Rag-pipeline)
+
 ---
 
 ## 💻 Tech Stack Overview
