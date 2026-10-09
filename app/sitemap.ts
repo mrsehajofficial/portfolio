@@ -14,24 +14,35 @@ interface PageSpec {
 }
 
 /**
- * Every URL here is built from the one canonical-origin constant in
- * lib/site.ts (https://sehaj.wasmer.app) and the route table in
- * lib/routes.ts — the same table the nav reads. A route can exist in the nav
- * and be missing from the sitemap only if the two drift; they can't, because
- * both entries list lib/routes.ts values explicitly.
+ * Priority reflects where a visitor's intent lands first, not nav order:
  *
- * Contact lives on the homepage only (no /contact route), so there is no entry
- * for it.
+ *   /           1.0  — the whole demonstration, one page
+ *   /work       0.95 — projects: what a hiring manager actually opens first
+ *   /pipeline   0.9  — the deepest technical proof (best "RAG pipeline" target)
+ *   /stack      0.85 — best "Python / Flask / LLM stack" query surface
+ *   /about      0.8  — trust and availability
+ *   /takes      0.75 — differentiation; converts readers, not searches
+ *   /faq        0.7  — long-tail query capture
+ *   /stream     0.6  — live demo, little standalone search value
+ *
+ * Every URL is built from the one canonical-origin constant in lib/site.ts
+ * (https://sehaj.wasmer.app) and the route table in lib/routes.ts — the same
+ * table the nav reads. A route can be added to the nav and forgotten here
+ * only if the two lists drift; keeping both pointed at lib/routes.ts values
+ * makes that impossible.
+ *
+ * Contact lives on the homepage only (no /contact route), so there is no
+ * entry for it.
  */
 const PAGES: readonly PageSpec[] = [
   { path: PAGE_PATHS.home, changeFrequency: "weekly", priority: 1 },
+  { path: PAGE_PATHS.work, changeFrequency: "monthly", priority: 0.95 },
   { path: PAGE_PATHS.pipeline, changeFrequency: "monthly", priority: 0.9 },
-  { path: PAGE_PATHS.work, changeFrequency: "monthly", priority: 0.9 },
-  { path: PAGE_PATHS.stream, changeFrequency: "monthly", priority: 0.8 },
-  { path: PAGE_PATHS.takes, changeFrequency: "monthly", priority: 0.8 },
+  { path: PAGE_PATHS.stack, changeFrequency: "monthly", priority: 0.85 },
   { path: PAGE_PATHS.about, changeFrequency: "monthly", priority: 0.8 },
-  { path: PAGE_PATHS.stack, changeFrequency: "monthly", priority: 0.7 },
-  { path: PAGE_PATHS.faq, changeFrequency: "monthly", priority: 0.6 },
+  { path: PAGE_PATHS.takes, changeFrequency: "monthly", priority: 0.75 },
+  { path: PAGE_PATHS.faq, changeFrequency: "monthly", priority: 0.7 },
+  { path: PAGE_PATHS.stream, changeFrequency: "monthly", priority: 0.6 },
 ];
 
 // Shared across all entries so every <lastmod> in a build agrees, instead of

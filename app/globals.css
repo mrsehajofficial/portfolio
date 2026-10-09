@@ -1049,7 +1049,15 @@ h1, h2, h3 {
   margin-top: 22px;
 }
 .page-title em { font-style: normal; color: var(--accent); }
-.page-body { padding: clamp(40px, 5vw, 56px) 0 var(--section); display: grid; gap: var(--gap); }
+/* The gap belongs on the CONTAINER, not on .page-body. Every detail page
+   wraps its cards in a single `.container` child, so a grid on .page-body
+   would have nothing to space apart — the cards would stack at 0px. */
+.page-body { padding: clamp(40px, 5vw, 56px) 0 var(--section); }
+.page-body > .container {
+  display: grid;
+  gap: var(--gap);
+  align-content: start;
+}
 
 .row {
   display: grid;
