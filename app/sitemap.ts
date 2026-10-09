@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 
 import { SITE_URL } from "../lib/site";
+import { PAGE_PATHS } from "../lib/routes";
 
-type PagePath = "/" | "/work" | "/about" | "/stack" | "/faq";
+type PagePath = (typeof PAGE_PATHS)[keyof typeof PAGE_PATHS];
 
 interface PageSpec {
   path: PagePath;
@@ -14,18 +15,23 @@ interface PageSpec {
 
 /**
  * Every URL here is built from the one canonical-origin constant in
- * lib/site.ts (https://sehaj.wasmer.app).
+ * lib/site.ts (https://sehaj.wasmer.app) and the route table in
+ * lib/routes.ts — the same table the nav reads. A route can exist in the nav
+ * and be missing from the sitemap only if the two drift; they can't, because
+ * both entries list lib/routes.ts values explicitly.
  *
- * The homepage is the hub; /work, /about, /stack and /faq are the detailed
- * section pages. Contact lives on the homepage only (no /contact route), so
- * it is deliberately absent here.
+ * Contact lives on the homepage only (no /contact route), so there is no entry
+ * for it.
  */
 const PAGES: readonly PageSpec[] = [
-  { path: "/", changeFrequency: "weekly", priority: 1 },
-  { path: "/work", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/about", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/stack", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/faq", changeFrequency: "monthly", priority: 0.7 },
+  { path: PAGE_PATHS.home, changeFrequency: "weekly", priority: 1 },
+  { path: PAGE_PATHS.pipeline, changeFrequency: "monthly", priority: 0.9 },
+  { path: PAGE_PATHS.work, changeFrequency: "monthly", priority: 0.9 },
+  { path: PAGE_PATHS.stream, changeFrequency: "monthly", priority: 0.8 },
+  { path: PAGE_PATHS.takes, changeFrequency: "monthly", priority: 0.8 },
+  { path: PAGE_PATHS.about, changeFrequency: "monthly", priority: 0.8 },
+  { path: PAGE_PATHS.stack, changeFrequency: "monthly", priority: 0.7 },
+  { path: PAGE_PATHS.faq, changeFrequency: "monthly", priority: 0.6 },
 ];
 
 // Shared across all entries so every <lastmod> in a build agrees, instead of

@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- ── v3: "Quiet Systems" social card ────────────────────────────────
+     Warm paper, ink type, single indigo accent. Deliberately calmer than the
+     letterpress card it replaces: one accent colour, one grid, no texture
+     filters that render inconsistently across image resizers. -->
+
+  <defs>
+    <linearGradient id="paper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="55%" stop-color="#fbfaf8" />
+      <stop offset="100%" stop-color="#f1efe9" />
+    </linearGradient>
+
+    <linearGradient id="accentFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="tileTint" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.07" />
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base -->
+  <rect width="1200" height="630" fill="url(#paper)" />
+
+  <!-- Layout grid: 12 columns, visible only as very faint rules -->
+  <g stroke="#16181c" stroke-opacity="0.05" stroke-width="1">
+    <line x1="120" y1="0" x2="120" y2="630" />
+    <line x1="260" y1="0" x2="260" y2="630" />
+    <line x1="400" y1="0" x2="400" y2="630" />
+    <line x1="800" y1="0" x2="800" y2="630" />
+    <line x1="940" y1="0" x2="940" y2="630" />
+    <line x1="1080" y1="0" x2="1080" y2="630" />
+  </g>
+
+  <!-- Margin rules -->
+  <line x1="100" y1="76" x2="1100" y2="76" stroke="#16181c" stroke-opacity="0.1" stroke-width="1" />
+  <line x1="100" y1="554" x2="1100" y2="554" stroke="#16181c" stroke-opacity="0.1" stroke-width="1" />
+
+  <!-- Header -->
+  <g transform="translate(100, 50)">
+    <circle cx="5" cy="0" r="4" fill="#4f46e5" />
+    <text x="20" y="4" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="13" letter-spacing="2.4" fill="#8a9099">
+      AI AUTOMATION &amp; BACKEND ENGINEERING
+    </text>
+    <text x="1000" y="4" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="13" letter-spacing="2" fill="#8a9099" text-anchor="end">
+      INDIA · REMOTE WORLDWIDE
+    </text>
+  </g>
+
+  <!-- Main statement -->
+  <g transform="translate(100, 158)">
+    <text x="0" y="0" font-family="'Inter','Liberation Sans',sans-serif" font-size="76" font-weight="500" letter-spacing="-2.4" fill="#16181c">
+      Systems that answer
+    </text>
+    <text x="0" y="88" font-family="'Inter','Liberation Sans',sans-serif" font-size="76" font-weight="500" letter-spacing="-2.4" fill="#16181c">
+      from real data,
+    </text>
+    <text x="0" y="176" font-family="'Inter','Liberation Sans',sans-serif" font-size="76" font-weight="500" letter-spacing="-2.4" fill="#4f46e5">
+      not guesses.
+    </text>
+
+    <!-- Accent rule -->
+    <rect x="2" y="214" width="180" height="4" fill="#4f46e5" rx="2" />
+
+    <!-- Sub-statement -->
+    <text x="2" y="262" font-family="'Inter','Liberation Sans',sans-serif" font-size="21" letter-spacing="-0.2" fill="#4b5058">
+      LLM agents · hybrid RAG pipelines · async Python backends
+    </text>
+    <text x="2" y="292" font-family="'Inter','Liberation Sans',sans-serif" font-size="21" letter-spacing="-0.2" fill="#8a9099">
+      demonstrated live on the site — not just described.
+    </text>
+  </g>
+
+  <!-- Right: capability tiles, drawn as the site draws them -->
+  <g transform="translate(700, 152)">
+    <rect x="0" y="15" width="400" height="300" rx="20" fill="#ffffff" stroke="#16181c" stroke-opacity="0.08" />
+    <rect x="0" y="15" width="400" height="300" rx="20" fill="url(#tileTint)" />
+
+    <text x="28" y="42" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="12" letter-spacing="2" fill="#8a9099">
+      LIVE MONITORS
+    </text>
+    <circle cx="360" cy="38" r="4" fill="#4f46e5" />
+
+    <!-- Row 1 -->
+    <g transform="translate(28, 74)">
+      <rect x="0" y="0" width="168" height="88" rx="14" fill="#fbfaf8" stroke="#16181c" stroke-opacity="0.07" />
+      <text x="16" y="26" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="10" letter-spacing="1.6" fill="#8a9099">TESTS PASSING</text>
+      <text x="16" y="62" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="34" font-weight="500" fill="#0f9d58">80</text>
+      <!-- sparkline -->
+      <g fill="#0f9d58">
+        <rect x="16" y="74" width="5" height="4" /><rect x="23" y="72" width="5" height="6" />
+        <rect x="30" y="70" width="5" height="8" /><rect x="37" y="66" width="5" height="12" />
+        <rect x="44" y="62" width="5" height="16" /><rect x="51" y="68" width="5" height="10" />
+        <rect x="58" y="64" width="5" height="14" /><rect x="65" y="60" width="5" height="18" />
+        <rect x="72" y="70" width="5" height="8" /><rect x="79" y="66" width="5" height="12" />
+        <rect x="86" y="72" width="5" height="6" /><rect x="93" y="68" width="5" height="10" />
+        <rect x="100" y="58" width="5" height="20" /><rect x="107" y="66" width="5" height="12" />
+        <rect x="114" y="62" width="5" height="16" /><rect x="121" y="70" width="5" height="8" />
+        <rect x="128" y="64" width="5" height="14" /><rect x="135" y="72" width="5" height="6" />
+      </g>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(204, 74)">
+      <rect x="0" y="0" width="168" height="88" rx="14" fill="#fbfaf8" stroke="#16181c" stroke-opacity="0.07" />
+      <text x="16" y="26" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="10" letter-spacing="1.6" fill="#8a9099">COVERAGE</text>
+      <text x="16" y="62" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="34" font-weight="500" fill="#4f46e5">60<tspan font-size="17" fill="#8a9099">%+</tspan></text>
+      <g fill="#4f46e5">
+        <rect x="16" y="70" width="5" height="8" /><rect x="23" y="66" width="5" height="12" />
+        <rect x="30" y="72" width="5" height="6" /><rect x="37" y="64" width="5" height="14" />
+        <rect x="44" y="70" width="5" height="8" /><rect x="51" y="72" width="5" height="6" />
+        <rect x="58" y="66" width="5" height="12" /><rect x="65" y="58" width="5" height="20" />
+        <rect x="72" y="68" width="5" height="10" /><rect x="79" y="64" width="5" height="14" />
+        <rect x="86" y="70" width="5" height="8" /><rect x="93" y="72" width="5" height="6" />
+        <rect x="100" y="60" width="5" height="18" /><rect x="107" y="66" width="5" height="12" />
+        <rect x="114" y="70" width="5" height="8" /><rect x="121" y="72" width="5" height="6" />
+        <rect x="128" y="64" width="5" height="14" /><rect x="135" y="68" width="5" height="10" />
+      </g>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(28, 178)">
+      <rect x="0" y="0" width="168" height="88" rx="14" fill="#fbfaf8" stroke="#16181c" stroke-opacity="0.07" />
+      <text x="16" y="26" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="10" letter-spacing="1.6" fill="#8a9099">RETRIEVAL P54</text>
+      <text x="16" y="62" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="34" font-weight="500" fill="#0e7490">1.2<tspan font-size="17" fill="#8a9099">ms</tspan></text>
+      <g fill="#0e7490">
+        <rect x="16" y="68" width="5" height="10" /><rect x="23" y="72" width="5" height="6" />
+        <rect x="30" y="66" width="5" height="12" /><rect x="37" y="70" width="5" height="8" />
+        <rect x="44" y="58" width="5" height="20" /><rect x="51" y="64" width="5" height="14" />
+        <rect x="58" y="70" width="5" height="8" /><rect x="65" y="66" width="5" height="12" />
+        <rect x="72" y="60" width="5" height="18" /><rect x="79" y="68" width="5" height="10" />
+        <rect x="86" y="72" width="5" height="6" /><rect x="93" y="64" width="5" height="14" />
+        <rect x="100" y="70" width="5" height="8" /><rect x="107" y="58" width="5" height="20" />
+        <rect x="114" y="66" width="5" height="12" /><rect x="121" y="70" width="5" height="8" />
+        <rect x="128" y="62" width="5" height="16" /><rect x="135" y="68" width="5" height="10" />
+      </g>
+    </g>
+
+    <!-- Row 4 -->
+    <g transform="translate(204, 178)">
+      <rect x="0" y="0" width="168" height="88" rx="14" fill="#fbfaf8" stroke="#16181c" stroke-opacity="0.07" />
+      <text x="16" y="26" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="10" letter-spacing="1.6" fill="#8a9099">LLM FALLBACKS</text>
+      <text x="16" y="62" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="34" font-weight="500" fill="#7c3aed">0</text>
+      <g fill="#7c3aed">
+        <rect x="16" y="72" width="5" height="6" /><rect x="23" y="70" width="5" height="8" />
+        <rect x="30" y="72" width="5" height="6" /><rect x="37" y="66" width="5" height="12" />
+        <rect x="44" y="72" width="5" height="6" /><rect x="51" y="70" width="5" height="8" />
+        <rect x="58" y="72" width="5" height="6" /><rect x="65" y="68" width="5" height="10" />
+        <rect x="72" y="72" width="5" height="6" /><rect x="79" y="70" width="5" height="8" />
+        <rect x="86" y="72" width="5" height="6" /><rect x="93" y="66" width="5" height="12" />
+        <rect x="100" y="72" width="5" height="6" /><rect x="107" y="70" width="5" height="8" />
+        <rect x="114" y="72" width="5" height="6" /><rect x="121" y="68" width="5" height="10" />
+        <rect x="128" y="72" width="5" height="6" /><rect x="135" y="70" width="5" height="8" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Footer: capability chips + domain -->
+  <g transform="translate(100, 594)">
+    <g font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="12" letter-spacing="1.2">
+      <rect x="0" y="-16" width="146" height="30" rx="15" fill="#ffffff" stroke="#16181c" stroke-opacity="0.1" />
+      <text x="73" y="4" fill="#4b5058" text-anchor="middle">LLM AGENTS</text>
+
+      <rect x="160" y="-16" width="146" height="30" rx="15" fill="#ffffff" stroke="#16181c" stroke-opacity="0.1" />
+      <text x="233" y="4" fill="#4b5058" text-anchor="middle">RAG PIPELINES</text>
+
+      <rect x="320" y="-16" width="166" height="30" rx="15" fill="#ffffff" stroke="#16181c" stroke-opacity="0.1" />
+      <text x="403" y="4" fill="#4b5058" text-anchor="middle">TELEGRAM BOTS</text>
+
+      <rect x="500" y="-16" width="150" height="30" rx="15" fill="#ffffff" stroke="#16181c" stroke-opacity="0.1" />
+      <text x="575" y="4" fill="#4b5058" text-anchor="middle">PYTHON / FLASK</text>
+    </g>
+
+    <text x="1000" y="4" font-family="'JetBrainsMono Nerd Font','JetBrains Mono',monospace" font-size="15" letter-spacing="0.6" fill="#16181c" text-anchor="end">
+      sehaj.wasmer.app
+    </text>
+  </g>
+</svg>

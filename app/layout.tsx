@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import RegCursor from "@/components/RegCursor";
@@ -9,24 +9,28 @@ import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { PERSON } from "@/lib/content";
 
 // ── Fonts ────────────────────────────────────────────────────────────────
-// PAPER PRESS typefaces, self-hosted via next/font:
-// Anton (single static weight 400 — one small file that preloads clean),
-// Archivo (variable grotesk for body — one file covers 400–700),
-// IBM Plex Mono (printer's notes — weights trimmed to exactly what CSS uses).
-const fontDisplay = Anton({
+// Quiet Systems typefaces, self-hosted via next/font:
+// Space Grotesk (display) — geometric with warmth; carries the headlines at
+//   large sizes where its character reads.
+// Inter (body) — optimised for on-screen reading at 16–18px; the readability
+//   backbone. Every paragraph on the site uses this.
+// JetBrains Mono (labels/data) — reserved for eyebrows, tags, metrics. Never
+//   for running text, so legibility never depends on monospace.
+const fontDisplay = Space_Grotesk({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500", "600"],
   variable: "--font-display",
   display: "swap",
 });
 
-const fontBody = Archivo({
+const fontBody = Inter({
   subsets: ["latin"],
+  weight: ["400", "500"],
   variable: "--font-body",
   display: "swap",
 });
 
-const fontMono = IBM_Plex_Mono({
+const fontMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",
@@ -64,13 +68,13 @@ export const metadata: Metadata = {
   publisher: PERSON.name,
   icons: {
     icon: [
-      { url: "/favicon-v2.ico", sizes: "any" },
-      { url: "/favicon-v2.svg", type: "image/svg+xml" },
-      { url: "/icon-192-v2.png", type: "image/png", sizes: "192x192" },
-      { url: "/icon-512-v2.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-v3.ico", sizes: "any" },
+      { url: "/favicon-v3.svg", type: "image/svg+xml" },
+      { url: "/icon-192-v3.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512-v3.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [
-      { url: "/apple-touch-icon-v2.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon-v3.png", sizes: "180x180", type: "image/png" },
     ],
   },
   robots: {
@@ -96,7 +100,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/og-image-v2.png",
+        url: "/og-image-v3.png",
         width: 1200,
         height: 630,
         alt: `${PERSON.name} — ${PERSON.role} Portfolio Banner`,
@@ -107,15 +111,15 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og-image-v2.png"],
+    images: ["/og-image-v3.png"],
   },
   alternates: { canonical: SITE_URL },
   category: "technology",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f2efe8",
-  colorScheme: "light",
+    themeColor: "#fbfaf8",
+    colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
@@ -133,7 +137,7 @@ const jsonLd = {
       "AI Automation Engineer & Backend Developer from India. Builds Telegram bots (Aegis), LLM agents, RAG pipelines, Python backends, and real-time messaging apps (Amai Yuki). Specializing in prompt orchestration, workflow automation, and scalable systems.",
     disambiguatingDescription:
       "AI Automation Engineer. Known on Instagram as @sehaj.varma.official. Not to be confused with Sehaj Verma (Senior Software Engineer at Motive), Sehaj Verma (Social Media Influencer @official_sehaj_verma), or Sahaj Verma (Cricketer).",
-    image: "https://sehaj.wasmer.app/og-image-v2.svg",
+    image: "https://sehaj.wasmer.app/og-image-v3.png",
     email: "mr.sehaj.official@gmail.com",
     sameAs: [
       "https://github.com/mrsehajofficial",
@@ -189,9 +193,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <SmoothScrollProvider>
-          <main id="main-content">{children}</main>
-        </SmoothScrollProvider>
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
         <RegCursor />
         <BackToTop />
       </body>

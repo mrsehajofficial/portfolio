@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- ── v3: "Quiet Systems" mark ─────────────────────────────────────────
+     Warm paper tile, ink monogram, single indigo accent for the vertex.
+     Replaces the letterpress/vermilion mark, which belonged to a theme
+     the site no longer uses. Filename carries -v3 so caches and search
+     engines treat it as a new asset rather than reusing the old icon. -->
+
+  <rect width="64" height="64" rx="14" fill="#fbfaf8" />
+
+  <!-- Faint inset frame: reads as instrument chrome at small sizes -->
+  <rect x="3.25" y="3.25" width="57.5" height="57.5" rx="11" fill="none" stroke="#16181c" stroke-opacity="0.1" stroke-width="1.25" />
+
+  <!-- Registration ticks (one per corner, aligned to the frame) -->
+  <g stroke="#16181c" stroke-opacity="0.22" stroke-width="1.25" stroke-linecap="round">
+    <line x1="32" y1="6" x2="32" y2="9" />
+    <line x1="32" y1="55" x2="32" y2="58" />
+    <line x1="6" y1="32" x2="9" y2="32" />
+    <line x1="55" y1="32" x2="58" y2="32" />
+  </g>
+
+  <!-- 'S' — ink, sculpted stroke -->
+  <path d="M 40.5 22 C 38.4 19.2 35 17.8 30.3 17.8 C 23.5 17.8 19 21.2 19 26.6 C 19 35 35.8 32.4 35.8 40.3 C 35.8 43.8 32.7 46.3 27.4 46.3 C 22 46.3 18.4 43.3 16.4 39.9"
+        fill="none"
+        stroke="#16181c"
+        stroke-width="4.4"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+
+  <!-- 'V' — indigo overprint -->
+  <path d="M 33.4 27.3 L 43.4 46.3 L 53.4 27.3"
+        fill="none"
+        stroke="#4f46e5"
+        stroke-width="4.4"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+
+  <!-- Overprint pip -->
+  <circle cx="43.4" cy="17.6" r="2.3" fill="#4f46e5" />
+</svg>

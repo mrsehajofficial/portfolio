@@ -2,37 +2,27 @@
 
 import { useEffect, useState } from "react";
 
-/**
- * BackToTop — "return to top of form": an ink chip with a vermilion hard
- * shadow, revealed after the visitor scrolls past the top.
- */
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300);
+    const onScroll = () => setVisible(window.scrollY > 600);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleClick = () => {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   return (
     <button
-      onClick={handleClick}
-      data-cursor-hover
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       aria-label="Back to top"
-      title="Back to top of form"
-      className={`back-to-top${visible ? " visible" : ""}`}
+      className={`top-btn${visible ? " visible" : ""}`}
     >
-      ↑ top
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
     </button>
   );
 }

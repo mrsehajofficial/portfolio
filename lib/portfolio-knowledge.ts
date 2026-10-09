@@ -202,6 +202,69 @@ const SYNONYMS: Record<string, string[]> = {
   script: ["scripts"],
 };
 
+/**
+ * Scored retrieval — the same deterministic ranking as `answerFor`, but it
+ * returns the full ranked list with per-query hit provenance so the UI can
+ * render WHY a card matched. This is what makes the retrieval console a
+ * real demonstration: the relevance bars are computed, not decorative.
+ *
+ * Deliberately returns NO wall-clock latency: `performance.now()` differs
+ * between the server render and the client render, so returning it here
+ * breaks hydration. Latency is measured by the caller, client-side only.
+ */
+export type ScoredHit = {
+  card: KnowledgeCard;
+  score: number;
+  /** Tokens that actually hit this card, with their weight. */
+  hits: { token: string; weight: number }[];
+};
+
+const WEIGHT_KEYWORD = 3;
+const WEIGHT_TITLE = 4;
+const WEIGHT_BODY = 1;
+
+export function retrieveWithScores(
+  query: string,
+  limit = 5
+): { hits: ScoredHit[]; tokens: string[] } {
+  const tokens = tokenize(query);
+
+  const scored: ScoredHit[] = [];
+
+  for (const card of KNOWLEDGE_CARDS) {
+    const title = card.title.toLowerCase();
+    const body = `${card.summary} ${card.detail ?? ""}`.toLowerCase();
+
+    let score = 0;
+    const hits: { token: string; weight: number }[] = [];
+
+    for (const token of tokens) {
+      let weight = 0;
+      if (card.keywords.some((k) => k === token)) {
+        weight = WEIGHT_KEYWORD;
+      } else if (title.includes(token)) {
+        weight = WEIGHT_TITLE;
+      } else if (body.includes(token)) {
+        weight = WEIGHT_BODY;
+      }
+      if (weight > 0) {
+        score += weight;
+        hits.push({ token, weight });
+      }
+    }
+
+    if (score > 0) scored.push({ card, score, hits });
+  }
+
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    // Deterministic tie-break: shorter titles rank first (more specific match).
+    return a.card.title.length - b.card.title.length;
+  });
+
+  return { hits: scored.slice(0, limit), tokens };
+}
+
 function tokenize(query: string): string[] {
   const raw = query
     .toLowerCase()

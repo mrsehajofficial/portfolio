@@ -1,14 +1,18 @@
 /**
- * Asset generator: rasterizes public/favicon.svg and public/og-image.svg
- * into the PNG renditions referenced by app/layout.tsx metadata and app/manifest.ts
+ * Asset generator: rasterizes the versioned SVG sources in public/ into the
+ * PNG/ICO renditions referenced by app/layout.tsx metadata and app/manifest.ts.
  *
- *   icon-192.png / icon-512.png           — "any" purpose launchers/favicons
- *   icon-maskable-192.png / -512.png      — full-bleed art inside Android's circular mask safe zone
- *   apple-touch-icon.png                  — iOS home-screen icon (Apple ignores SVG favicons)
- *   favicon.ico                           — multi-res 16/32/48 ICO container
- *   og-image.png                          — 1200x630 social share card
+ *   favicon-v3.svg              → icon-192-v3.png, icon-512-v3.png, favicon-v3.ico
+ *   icon-maskable-v3.svg        → icon-maskable-192-v3.png, -512-v3.png, apple-touch-icon-v3.png
+ *   og-image-v3.svg             → og-image-v3.png
  *
- * Run once whenever the brand mark changes:
+ * The version suffix is deliberate: it makes each design change a new URL, so
+ * search engines and browsers re-fetch the icon instead of serving a cached
+ * copy of the previous one. When the mark changes again, bump the suffixes in
+ * the SOURCES constant below, run this script, and update the references in
+ * app/layout.tsx, app/manifest.ts and lib/entity.ts.
+ *
+ * Run:
  *   node scripts/generate-icons.mjs
  */
 import { readFile, writeFile } from "node:fs/promises";
@@ -20,64 +24,64 @@ import sharp from "sharp";
 const root = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(root, "..", "public");
 
-const faviconSvg = await readFile(path.join(publicDir, "favicon.svg"));
-const ogSvg = await readFile(path.join(publicDir, "og-image.svg"));
+/** Bump this when the brand mark or the layout changes. */
+const VERSION = "v3";
 
-// Full-bleed maskable variant for Android launchers and Apple Touch Icon:
-// Solid #17130d background with the SV monogram scaled safely inside the inner 70% zone.
-const fullBleedSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" fill="#17130d"/>
-  <path d="M 40 21.5 C 38 18.5 34.5 17 29.5 17 C 22.5 17 18 20.5 18 26 C 18 34.5 35 32 35 40 C 35 43.5 31.8 46 26.5 46 C 21.2 46 17.5 43 15.5 39.5" 
-        fill="none" 
-        stroke="#f2efe8" 
-        stroke-width="4.5" 
-        stroke-linecap="round" 
-        stroke-linejoin="round" />
-  <path d="M 33 26.5 L 43.5 46.5 L 53 26.5" 
-        fill="none" 
-        stroke="#d6401f" 
-        stroke-width="4.5" 
-        stroke-linecap="round" 
-        stroke-linejoin="round" />
-  <circle cx="43.5" cy="18" r="2.2" fill="#d6401f" />
-</svg>`;
+const file = (base, ext = ".svg") => `${base}-${VERSION}${ext}`;
 
+/**
+ * sharp renders SVG through librsvg, which resolves the viewBox but needs an
+ * explicit density to rasterize a small viewBox at a large pixel size. 64px
+ * artwork at 192px output means density 2.5×; deriving it keeps strokes crisp.
+ */
 const densityFor = (size, base = 64) => Math.round((72 * size) / base);
 
+const read = (name) => readFile(path.join(publicDir, name));
+
+const faviconSvg = await read(file("favicon"));
+const maskableSvg = await read(file("icon-maskable"));
+const ogSvg = await read(file("og-image"));
+
+const ogVersion = "v3";
+
 const targets = [
-  { src: faviconSvg, name: "icon-192.png", size: 192, base: 64 },
-  { src: faviconSvg, name: "icon-512.png", size: 512, base: 64 },
-  { src: Buffer.from(fullBleedSvg), name: "icon-maskable-192.png", size: 192, base: 64 },
-  { src: Buffer.from(fullBleedSvg), name: "icon-maskable-512.png", size: 512, base: 64 },
-  { src: Buffer.from(fullBleedSvg), name: "apple-touch-icon.png", size: 180, base: 64 },
+  { src: faviconSvg, name: `icon-192-${VERSION}.png`, size: 192 },
+  { src: faviconSvg, name: `icon-512-${VERSION}.png`, size: 512 },
+  // Maskable art is full-bleed and pre-scaled into the safe zone, so it also
+  // serves as the Apple touch icon.
+  { src: maskableSvg, name: `icon-maskable-192-${VERSION}.png`, size: 192 },
+  { src: maskableSvg, name: `icon-maskable-512-${VERSION}.png`, size: 512 },
+  { src: maskableSvg, name: `apple-touch-icon-${VERSION}.png`, size: 180 },
 ];
 
-for (const { src, name, size, base } of targets) {
+for (const { src, name, size } of targets) {
   const out = path.join(publicDir, name);
-  await sharp(src, { density: densityFor(size, base) })
+  await sharp(src, { density: densityFor(size) })
     .resize(size, size)
     .png({ compressionLevel: 9 })
     .toFile(out);
   console.log(`✔ ${name} (${size}×${size})`);
 }
 
-// Generate og-image.png (1200x630)
-const ogOut = path.join(publicDir, "og-image.png");
-await sharp(ogSvg)
-  .resize(1200, 630)
+// Social share card. Kept as a PNG because X, Facebook and LinkedIn do not
+// render SVG previews — an SVG here would show as a blank card.
+const ogOut = path.join(publicDir, `og-image-${ogVersion}.png`);
+await sharp(ogSvg, { density: 96 })
+  .resize(1200, 630, { fit: "cover" })
   .png({ compressionLevel: 8 })
   .toFile(ogOut);
-console.log(`✔ og-image.png (1200×630)`);
+console.log(`✔ og-image-${ogVersion}.png (1200×630)`);
 
-// Classic favicon.ico: multi-resolution ICO container (16/32/48)
+// Classic favicon.ico: a multi-resolution ICO container. favicon.svg alone
+// isn't accepted by Google's favicon picker, so the ICO matters for search.
 const icoSizes = [16, 32, 48];
 const icoPngs = await Promise.all(
   icoSizes.map((size) =>
-    sharp(faviconSvg, { density: densityFor(size, 64) })
+    sharp(faviconSvg, { density: densityFor(size) })
       .resize(size, size)
       .png({ compressionLevel: 9 })
-      .toBuffer(),
-  ),
+      .toBuffer()
+  )
 );
 
 const header = Buffer.alloc(6);
@@ -102,9 +106,9 @@ icoPngs.forEach((png, i) => {
 });
 
 await writeFile(
-  path.join(publicDir, "favicon.ico"),
-  Buffer.concat([header, directory, ...icoPngs]),
+  path.join(publicDir, `favicon-${VERSION}.ico`),
+  Buffer.concat([header, directory, ...icoPngs])
 );
-console.log(`✔ favicon.ico (${icoSizes.join("/")})`);
+console.log(`✔ favicon-${VERSION}.ico (${icoSizes.join("/")})`);
 
-console.log("\nAll icons and OG images written to public/ successfully.");
+console.log("\nAll icons and OG image written to public/.");

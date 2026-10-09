@@ -3,71 +3,65 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * RegCursor — a print-registration crosshair cursor.
- * A vermilion dot follows the pointer instantly; a square ring lags on a
- * compositor rAF (translate3d only) and grows when hovering interactive
- * elements. Touch devices and reduced-motion users get the native cursor.
+ * Cursor — a soft ring that trails slightly behind the pointer and expands on
+ * interactive elements. Deliberately gentle: it should feel like the page is
+ * paying attention, not that a targeting reticle locked on.
  */
 export default function RegCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
     const isTouch = window.matchMedia("(pointer: coarse)").matches;
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (isTouch || prefersReducedMotion) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isTouch || reduce) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let ringX = 0;
-    let ringY = 0;
-    let rafId = 0;
+    let x = 0, y = 0, rx = 0, ry = 0, raf = 0;
 
     const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+      x = e.clientX;
+      y = e.clientY;
+      if (!visible) setVisible(true);
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX - 2.5}px, ${
-          mouseY - 2.5
-        }px, 0)`;
+        dotRef.current.style.transform = `translate3d(${x - 2.5}px, ${y - 2.5}px, 0)`;
       }
     };
 
     const onOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      setHovering(!!target.closest("a, button, [data-cursor-hover]"));
+      const t = e.target as HTMLElement;
+      setHovering(!!t.closest("a, button, input, [data-cursor-hover]"));
     };
 
     const loop = () => {
-      // Frame-rate-independent lerp — smooth even when the tab lags.
-      ringX += (mouseX - ringX) * 0.16;
-      ringY += (mouseY - ringY) * 0.16;
+      rx += (x - rx) * 0.15;
+      ry += (y - ry) * 0.15;
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+        ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
       }
-      rafId = requestAnimationFrame(loop);
+      raf = requestAnimationFrame(loop);
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseover", onOver, { passive: true });
-    rafId = requestAnimationFrame(loop);
+    raf = requestAnimationFrame(loop);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover", onOver);
-      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [visible]);
 
   return (
-    <div aria-hidden="true" className="reg-cursor" style={{ opacity: isVisible ? 1 : 0 }}>
+    <div
+      aria-hidden="true"
+      className="reg-cursor"
+      style={{ opacity: visible ? 1 : 0, transition: "opacity 0.4s var(--ease)" }}
+    >
       <div ref={dotRef} className="reg-dot" />
       <div ref={ringRef} className={`reg-ring${hovering ? " hovering" : ""}`} />
     </div>
-   );
-}   
+  );
+}

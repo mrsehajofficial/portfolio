@@ -1,25 +1,24 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import PressNav from "@/components/PressNav";
-import PressFooter from "@/components/PressFooter";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import CurtainReveal from "@/components/CurtainReveal";
-import { PROJECTS, EVIDENCE, PERSON } from "@/lib/content";
+import { BUILD_GRAPHS } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "AI, Python & Telegram Projects — Case Studies",
+  title: "Work: Systems from Zero to Shipped",
   description:
-    "Detailed engineering case studies for Aegis (Telegram group management & business bot), Amai Yuki (real-time messaging app), and RAG Pipeline (production-grade hybrid retrieval-augmented generation system), plus automation and AI work.",
+    "Architecture and engineering decisions behind Aegis (Telegram group management & business automation), Amai Yuki (real-time messaging app), and a production hybrid RAG pipeline — every node is a real component.",
   alternates: { canonical: `${SITE_URL}work` },
   openGraph: {
     type: "website",
-    title: "AI, Python & Telegram Projects — Case Studies — Sehaj Varma",
+    title: "Work: Systems from Zero to Shipped — Sehaj Varma",
     description:
-      "Detailed engineering case studies for Aegis (Telegram group management & business bot), Amai Yuki (real-time messaging app), and RAG Pipeline (production-grade hybrid retrieval-augmented generation system), plus automation and AI work.",
+      "Aegis, Amai Yuki, and a production hybrid RAG pipeline — drawn as their architectures, with the decision each design followed from.",
     url: `${SITE_URL}work`,
     images: [
       {
-        url: "/og-image-v2.png",
+        url: "/og-image-v3.png",
         width: 1200,
         height: 630,
         alt: "Sehaj Varma — AI Automation Engineer & Backend Developer Portfolio Banner",
@@ -30,35 +29,32 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@graph": PROJECTS.map((project) => ({
+  "@graph": BUILD_GRAPHS.map((build) => ({
     "@type": "SoftwareSourceCode",
-    name: project.title,
-    description: project.subtitle,
-    codeRepository: project.sourceUrl,
-    programmingLanguage: project.tags,
-    author: { "@type": "Person", name: PERSON.name, url: SITE_URL },
+    name: build.title,
+    description: build.subtitle,
+    codeRepository: build.sourceUrl,
+    programmingLanguage: build.tags,
+    author: { "@type": "Person", name: "Sehaj Varma", url: SITE_URL },
   })),
 };
 
 export default function WorkPage() {
   return (
     <>
-      <PressNav />
+      <Nav />
 
       <section className="page-head">
         <div className="container">
           <CurtainReveal>
-            <p className="page-eyebrow mono">Form 02 — case studies</p>
-            <h1 className="page-h1">
-              Production systems — from zero to{" "}
-              <em className="accent-over">shipped.</em>
+            <p className="eyebrow">Selected work</p>
+            <h1 className="page-title">
+              Three systems, drawn the way they <em>actually run.</em>
             </h1>
-            <p className="lead">
-              The full engineering stories behind Aegis (Telegram group management
-              &amp; business automation), Amai Yuki (cross-platform real-time
-              messaging), and RAG Pipeline (production-grade hybrid retrieval-augmented
-              generation). The architectural decisions, tradeoffs, and parts that
-              didn&rsquo;t work the first time.
+            <p className="lead" style={{ marginTop: 26 }}>
+              The architectural decisions, the tradeoffs made explicit, and the
+              load-bearing choice behind each one. Every node below is a real
+              component — <b>nothing here is illustrative.</b>
             </p>
           </CurtainReveal>
         </div>
@@ -66,122 +62,59 @@ export default function WorkPage() {
 
       <section className="page-body">
         <div className="container">
-          {PROJECTS.map((project, idx) => (
-            <div
-              key={project.id}
-              id={project.id}
-              style={{
-                marginTop: idx > 0 ? 80 : 0,
-                paddingTop: idx > 0 ? 60 : 0,
-                borderTop: idx > 0 ? "1px dashed var(--ink-20)" : "none",
-              }}
-            >
-              <CurtainReveal>
-                <p className="form-eyebrow mono" style={{ color: "var(--ink-50)" }}>
-                  project {project.projectNo} — {project.title.toLowerCase()}
-                </p>
-                <h2 className="group-h2" style={{ marginTop: 16 }}>
-                  {project.title}: {project.subtitle}
-                </h2>
-                <p className="case-label mono" style={{ marginTop: 24 }}>
-                  the problem
-                </p>
-                <p className="section-body" style={{ marginTop: 12 }}>
-                  {project.problem}
-                </p>
-              </CurtainReveal>
-
-              {project.buildBlocks && (
-                <CurtainReveal delay={0.05}>
-                  <p
-                    className="case-label mono"
-                    style={{ marginTop: 44 }}
-                  >
-                    the build blocks
-                  </p>
-                  {project.buildBlocks.map((block) => (
-                    <div className="group-row" key={block.label}>
-                      <h3 className="group-h2">{block.label}</h3>
-                      <p className="section-body" style={{ marginTop: 12 }}>
-                        {block.body}
-                      </p>
-                    </div>
-                  ))}
-                </CurtainReveal>
-              )}
-
-              <CurtainReveal delay={0.05}>
-                <p
-                  className="case-label mono"
-                  style={{ marginTop: 44 }}
-                >
-                  the result
-                </p>
-                <div className="plate-card crop" style={{ marginTop: 16 }}>
-                  <h3>{project.title}</h3>
-                  <p>{project.result}</p>
-                  <div className="tag-row" style={{ marginTop: 18 }}>
-                    {project.tags.map((t) => (
-                      <span className="pill" key={t}>
-                        {t}
-                      </span>
-                    ))}
+          {BUILD_GRAPHS.map((build) => (
+            <article className="card" key={build.id} id={build.id}>
+              <div className="card-body">
+                <div className="build-head">
+                  <div>
+                    <h2 className="build-name">
+                      <span className="build-no">{build.order}</span>
+                      {build.title}
+                    </h2>
+                    <p className="build-sub">{build.subtitle}</p>
                   </div>
-                  <div style={{ display: "flex", gap: 16, marginTop: 22, flexWrap: "wrap" }}>
-                    <a
-                      href={project.sourceUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-cursor-hover
-                      className="source-link"
-                    >
-                      view source ↗
+                  <div className="build-actions">
+                    <a className="btn-ghost" href={build.sourceUrl} target="_blank" rel="noopener noreferrer">
+                      Source
                     </a>
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-cursor-hover
-                        className="source-link"
-                        style={{ color: "var(--vermilion)" }}
-                      >
-                        live showcase ↗
+                    {build.liveUrl && (
+                      <a className="btn-ghost primary" href={build.liveUrl} target="_blank" rel="noopener noreferrer">
+                        Live ↗
                       </a>
                     )}
                   </div>
                 </div>
-              </CurtainReveal>
-            </div>
+
+                <div className="nodes" style={{ marginTop: 28 }}>
+                  {build.nodes.map((node, i) => (
+                    <div className="node" key={node.name}>
+                      <div className="node-top">
+                        <span className="node-no">{String(i + 1).padStart(2, "0")}</span>
+                        <span className={`dot ${node.tone ?? "accent"}`} />
+                      </div>
+                      <p className="node-name">{node.name}</p>
+                      {node.sub && <p className="node-sub">{node.sub}</p>}
+                      {node.metric && <p className="node-metric">{node.metric}</p>}
+                    </div>
+                  ))}
+                </div>
+
+                <p className="note">
+                  <b>Load-bearing decision.</b> {build.note}
+                </p>
+
+                <div className="tags">
+                  {build.tags.map((t) => (
+                    <span className="tag" key={t}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
           ))}
 
-          <CurtainReveal delay={0.1}>
-            <p
-              className="eyebrow-late mono"
-              style={{ color: "var(--ink-30)", marginTop: 64 }}
-            >
-              appendix — more evidence
-            </p>
-            <div className="cards-3" style={{ marginTop: 20 }}>
-              {EVIDENCE.map((card) => (
-                <div className="plate-card" key={card.id}>
-                  <h3>{card.title}</h3>
-                  <p>{card.body}</p>
-                </div>
-              ))}
-            </div>
-          </CurtainReveal>
-
-          <CurtainReveal delay={0.1}>
-            <div className="link-row">
-              <Link href="/stack" data-cursor-hover className="text-link">
-                see the full stack page →
-              </Link>
-              <Link href="/#contact" data-cursor-hover className="text-link dim">
-                get in touch →
-              </Link>
-            </div>
-          </CurtainReveal>
+          <div className="link-row">
+            <a className="btn primary" href="/#contact">Start a conversation</a>
+          </div>
         </div>
       </section>
 
@@ -190,7 +123,7 @@ export default function WorkPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <PressFooter />
+      <Footer />
     </>
   );
 }

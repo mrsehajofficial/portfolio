@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import PressNav from "@/components/PressNav";
-import PressFooter from "@/components/PressFooter";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import CurtainReveal from "@/components/CurtainReveal";
 import { FAQS } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "FAQ: Who is Sehaj Varma? What does he build?",
+  title: "Questions: Who is Sehaj Varma? What does he build?",
   description:
-    "Plain answers about who Sehaj Varma is, his tech stack, the Aegis and Amai Yuki projects, the RAG Pipeline, and how to hire him for AI automation, Python backends, and freelance work.",
+    "Plain answers about who Sehaj Varma is, his tech stack, the Aegis and Amai Yuki projects, the RAG pipeline, and how to hire him for AI automation, Python backends, and freelance work.",
   alternates: { canonical: `${SITE_URL}faq` },
   openGraph: {
     type: "website",
-    title: "FAQ: Who is Sehaj Varma? What does he build? — Sehaj Varma",
+    title: "Questions: Who is Sehaj Varma? What does he build?",
     description:
-      "Plain answers about who Sehaj Varma is, his tech stack, the Aegis and Amai Yuki projects, the RAG Pipeline, and how to hire him for AI automation, Python backends, and freelance work.",
+      "Plain answers about who Sehaj Varma is, his tech stack, the Aegis and Amai Yuki projects, the RAG pipeline, and how to hire him.",
     url: `${SITE_URL}faq`,
     images: [
       {
-        url: "/og-image-v2.png",
+        url: "/og-image-v3.png",
         width: 1200,
         height: 630,
         alt: "Sehaj Varma — AI Automation Engineer & Backend Developer Portfolio Banner",
@@ -41,19 +41,19 @@ const faqJsonLd = {
 export default function FaqPage() {
   return (
     <>
-      <PressNav />
+      <Nav />
 
       <section className="page-head">
         <div className="container">
           <CurtainReveal>
-            <p className="page-eyebrow mono">Form 05 — field questions</p>
-            <h1 className="page-h1">
-              Frequently asked, <em className="accent-over">plainly answered.</em>
+            <p className="eyebrow">Questions</p>
+            <h1 className="page-title">
+              Asked often, <em>answered plainly.</em>
             </h1>
-            <p className="lead">
+            <p className="lead" style={{ marginTop: 26 }}>
               Short, factual answers about who I am, what I build, and how to
-              work with me. Everything here is something I&rsquo;d say over a
-              call — no canned lines.
+              work with me. Everything here is something I&apos;d say over a
+              call — <b>no canned lines.</b>
             </p>
           </CurtainReveal>
         </div>
@@ -61,20 +61,19 @@ export default function FaqPage() {
 
       <section className="page-body">
         <div className="container">
-          <div className="slips">
-            {FAQS.map(({ question, answer }, i) => (
-              <div className="slip" key={question}>
-                <div className="slip-head" style={{ cursor: "default" }}>
-                  <span className="slip-num">
-                    Q.{String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h2 className="slip-q">{question}</h2>
-                </div>
-                <div className="slip-a" style={{ paddingBottom: 30, paddingTop: 0 }}>
-                  {answer}
-                </div>
+          <div className="card">
+            <div className="card-body">
+              <div className="faq">
+                {FAQS.map(({ question, answer }, i) => (
+                  <div className="faq-item" key={question}>
+                    <div className="faq-head" style={{ cursor: "default" }}>
+                      <span className="faq-q">{question}</span>
+                    </div>
+                    <p className="faq-a" style={{ paddingTop: 0 }}>{answer}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
 
           <script
@@ -84,7 +83,7 @@ export default function FaqPage() {
         </div>
       </section>
 
-      <PressFooter />
+      <Footer />
     </>
   );
 }

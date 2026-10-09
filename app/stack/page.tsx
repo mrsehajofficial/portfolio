@@ -1,25 +1,24 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import PressNav from "@/components/PressNav";
-import PressFooter from "@/components/PressFooter";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import CurtainReveal from "@/components/CurtainReveal";
 import { STACK, STACK_NOTE } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Tech Stack: AI, Python, Flask, Flutter & More",
+  title: "Stack: AI, Python, Flask, Flutter & Deployment",
   description:
-    "Tools behind the work, grouped by delivery: AI (OpenAI, Gemini, RAG, FAISS), Python/Flask backends, WSGI/gunicorn, automation scripts, Flutter, and deployment.",
+    "Tools behind the work, grouped by delivery: AI (OpenAI, Gemini, RAG, FAISS), Python/Flask backends, WSGI/gunicorn, automation scripts, Flutter, and deployment across Wasmer, Vercel, Netlify, Render and Docker.",
   alternates: { canonical: `${SITE_URL}stack` },
   openGraph: {
     type: "website",
-    title: "Tech Stack: AI, Python, Flask, Flutter & More — Sehaj Varma",
+    title: "Stack: AI, Python, Flask & Deployment — Sehaj Varma",
     description:
-      "Tools behind the work, grouped by delivery: AI (OpenAI, Gemini, RAG), Python/Flask backends, automation scripts, Flutter, and deployment.",
+      "Tools behind the work, grouped by delivery: AI, Python/Flask backends, automation scripts, Flutter and deployment.",
     url: `${SITE_URL}stack`,
     images: [
       {
-        url: "/og-image-v2.png",
+        url: "/og-image-v3.png",
         width: 1200,
         height: 630,
         alt: "Sehaj Varma — AI Automation Engineer & Backend Developer Portfolio Banner",
@@ -28,24 +27,33 @@ export const metadata: Metadata = {
   },
 };
 
+const TONE: Record<string, string> = {
+  AI: "llm",
+  Backend: "ok",
+  Automation: "hot",
+  Frontend: "warn",
+  Deployment: "info",
+};
+
 export default function StackPage() {
   return (
     <>
-      <PressNav />
+      <Nav />
 
       <section className="page-head">
         <div className="container">
           <CurtainReveal>
-            <p className="page-eyebrow mono">Form 04 — tools of the trade</p>
-            <h1 className="page-h1">
-              What I work with — <em className="accent-over">and where it ships.</em>
+            <p className="eyebrow">The stack</p>
+            <h1 className="page-title">
+              Grouped by what it <em>delivers.</em>
             </h1>
-            <p className="lead">
-              Grouped by what I deliver, not by logo wall. Everything below is
-              something I&rsquo;ve shipped or used in real projects — with the
-              receipts for where each one shows up.
+            <p className="lead" style={{ marginTop: 26 }}>
+              Not a logo wall. Everything below is something I&apos;ve shipped or
+              relied on in a real project, with the receipt for where it shows
+              up.
             </p>
-            <p className="lead" style={{ marginTop: 18, fontSize: 15.5, color: "var(--ink-50)" }}>
+            <p className="lead" style={{ marginTop: 18, color: "var(--ink-3)", fontSize: 15.5 }}>
+              <b style={{ color: "var(--ink)" }}>How I choose tools.</b>{" "}
               {STACK_NOTE}
             </p>
           </CurtainReveal>
@@ -54,36 +62,34 @@ export default function StackPage() {
 
       <section className="page-body">
         <div className="container">
-          {STACK.map((group) => (
-            <CurtainReveal key={group.name}>
-              <div className="group-row">
-                <h2 className="group-h2">{group.name}</h2>
-                <div className="pill-row">
-                  {group.items.map((item) => (
-                    <span className="pill" key={item}>
-                      {item}
-                    </span>
-                  ))}
+          <div className="stack-grid">
+            {STACK.map((group) => (
+              <article className="card" key={group.name}>
+                <div className="card-head">
+                  <span className="card-title">
+                    <span className={`dot ${TONE[group.name] ?? "accent"}`} />
+                    {group.name}
+                  </span>
                 </div>
-                <p className="section-body">{group.where}</p>
-              </div>
-            </CurtainReveal>
-          ))}
+                <div className="card-body">
+                  <div className="stack-pills">
+                    {group.items.map((item) => (
+                      <span className="stack-pill" key={item}>{item}</span>
+                    ))}
+                  </div>
+                  <p className="stack-where">{group.where}</p>
+                </div>
+              </article>
+            ))}
+          </div>
 
-          <CurtainReveal delay={0.1}>
-            <div className="link-row">
-              <Link href="/work" data-cursor-hover className="text-link">
-                see where these ship →
-              </Link>
-              <Link href="/#contact" data-cursor-hover className="text-link dim">
-                get in touch →
-              </Link>
-            </div>
-          </CurtainReveal>
+          <div className="link-row">
+            <a className="btn primary" href="/#builds">See where these ship</a>
+          </div>
         </div>
       </section>
 
-      <PressFooter />
+      <Footer />
     </>
   );
 }

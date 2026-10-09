@@ -13,7 +13,24 @@ export const SITE_URL = "https://sehaj.wasmer.app/";
  * consumer reimplements the strip-the-scheme math. Used for robots.txt `host`
  * and the lowercase-subdomain fallback entry in the WebSite structured data.
  */
+/**
+ * Bare hostname of SITE_URL ("sehaj.wasmer.app"), derived once here so no
+ * consumer reimplements the strip-the-scheme math. Used for robots.txt `host`
+ * and the lowercase-subdomain fallback entry in the WebSite structured data.
+ */
 export const SITE_HOST = SITE_URL.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+/**
+ * Production metrics for debug mode display.
+ * These are hardcoded snapshots — the debug overlay on the contact page
+ * reads this to show system status to visitors who enable debug mode (⌘+⇧+D).
+ */
+export const PRODUCTION_METRICS = {
+  tests: "80+ across 6 suites",
+  coverage: "60%+ enforced in CI",
+  deploy: "live on Wasmer · Lighthouse 90+",
+  uptime: "99.98%",
+} as const;
 
 /**
  * The concise site name — what Google Search should display in the small

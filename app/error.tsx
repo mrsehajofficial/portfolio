@@ -2,58 +2,37 @@
 
 import { useEffect } from "react";
 
-type ErrorPageProps = {
-  error: Error & { digest?: string };
-  reset: () => void;
-};
+type Props = { error: Error & { digest?: string }; reset: () => void };
 
-/**
- * Route-level error boundary — styled as a press failure sheet. It stays free
- * of app-level components so it renders even if a client dependency crashed.
- */
-export default function Error({ error, reset }: ErrorPageProps) {
+export default function Error({ error, reset }: Props) {
   useEffect(() => {
     console.error("[portfolio] Unhandled UI error:", error);
   }, [error]);
 
   return (
-    <section
-      style={{
-        padding: "170px 0 140px",
-        minHeight: "75vh",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
+    <section className="page-head" style={{ minHeight: "70vh" }}>
       <div className="container">
-        <p className="page-eyebrow mono" style={{ marginBottom: 22, color: "var(--vermilion)" }}>
-          error 500 — press fault
+        <p className="eyebrow" style={{ color: "var(--alert)" }}>
+          Error 500 — something broke
         </p>
-        <h1 className="page-h1">
-          Something broke <em className="accent-over">on my side.</em>
+        <h1 className="page-title" style={{ marginTop: 22 }}>
+          That&apos;s on <em>me.</em>
         </h1>
-        <p className="lead">
+        <p className="lead" style={{ marginTop: 26 }}>
           An unexpected error interrupted this view. Retrying usually fixes it —
-          if it keeps happening, tell me straight.
+          if it keeps happening, tell me straight and I&apos;ll fix it properly.
         </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 40 }}>
-          <button type="button" onClick={reset} data-cursor-hover className="cta-press">
-            try again
-          </button>
-          <a
-            href="mailto:mr.sehaj.official@gmail.com"
-            data-cursor-hover
-            className="cta-plate"
-          >
-            report it via email
+        <div className="link-row">
+          <button className="btn primary" onClick={reset}>Try again</button>
+          <a className="btn outline" href="mailto:mr.sehaj.official@gmail.com">
+            Report by email
           </a>
         </div>
-
-        {error.digest ? (
-          <p className="mono" style={{ marginTop: 40, fontSize: 12, color: "var(--ink-50)" }}>
+        {error.digest && (
+          <p className="mono" style={{ marginTop: 32 }}>
             reference: {error.digest}
           </p>
-        ) : null}
+        )}
       </div>
     </section>
   );
