@@ -3,7 +3,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import CurtainReveal from "@/components/CurtainReveal";
 import EventStream from "@/components/EventStream";
-import { LIVE_METRICS } from "@/lib/content";
+import { LIVE_METRICS, METRICS_NOTE } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 import { PAGE_PATHS } from "@/lib/routes";
 
@@ -73,7 +73,12 @@ export default function StreamPage() {
               <div className="tiles">
                 {LIVE_METRICS.map((m) => (
                   <div className="tile" key={m.label}>
-                    <p className="tile-label">{m.label}</p>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <p className="tile-label">{m.label}</p>
+                      {m.simulated && (
+                        <span className="mono" style={{ fontSize: 10, opacity: 0.5 }}>sim</span>
+                      )}
+                    </div>
                     <p className="tile-value">
                       {m.value}
                       {m.suffix && <small>{m.suffix}</small>}
@@ -82,6 +87,9 @@ export default function StreamPage() {
                   </div>
                 ))}
               </div>
+              <p className="mono" style={{ fontSize: 11, opacity: 0.5, marginTop: 14 }}>
+                {METRICS_NOTE}
+              </p>
             </div>
           </div>
 

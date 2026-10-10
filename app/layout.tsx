@@ -144,6 +144,7 @@ const jsonLd = {
       "https://github.com/mrsehajofficial/aegis",
       "https://github.com/mrsehajofficial/Amai-Yuki",
       "https://github.com/mrsehajofficial/Rag-pipeline",
+      "https://github.com/mrsehajofficial/ovyth",
       "https://aegis.wasmer.app/",
       "https://www.linkedin.com/in/mrsehajofficial/",
       "https://www.instagram.com/sehaj.varma.official/",
@@ -161,6 +162,9 @@ const jsonLd = {
       "real-time messaging systems",
       "distributed event streaming",
       "workflow automation",
+      "compiled language design",
+      "compiler construction",
+      "systems programming",
     ],
     speakable: {
       "@type": "Speakable",

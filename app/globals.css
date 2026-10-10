@@ -54,7 +54,7 @@
 
   /* Rhythm */
   --gap: 20px;
-  --section: clamp(96px, 13vw, 180px);
+  --section: clamp(56px, 8vw, 96px);
   --container: min(1180px, calc(100% - clamp(40px, 8vw, 120px)));
 
   /* One curve, used everywhere */
@@ -1186,7 +1186,7 @@ h1, h2, h3 {
 /* ═══════════════════════════════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════════════════════════════ */
-.footer { border-top: 1px solid var(--edge); padding: 44px 0 52px; margin-top: var(--section); }
+.footer { border-top: 1px solid var(--edge); padding: 32px 0 44px; margin-top: clamp(48px, 8vw, 72px); }
 .footer-inner {
   display: flex;
   justify-content: space-between;

@@ -108,6 +108,20 @@ export default function WorkPage() {
                     <span className="tag" key={t}>{t}</span>
                   ))}
                 </div>
+
+                <div className="link-row" style={{ marginTop: 22 }}>
+                  <a className="btn-ghost primary" href={`/work/${build.id}`}>
+                    Full case study ↗
+                  </a>
+                  <a className="btn-ghost" href={build.sourceUrl} target="_blank" rel="noopener noreferrer">
+                    Source ↗
+                  </a>
+                  {build.liveUrl && (
+                    <a className="btn-ghost" href={build.liveUrl} target="_blank" rel="noopener noreferrer">
+                      Live ↗
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}

@@ -31,6 +31,21 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
       "Five capability groups: AI (OpenAI · Gemini · RAG · Agents · Prompt orchestration), Backend (Python · Flask · REST APIs · SQLite · SQLAlchemy · AsyncIO), Automation (Telegram Bots · Python scripting · Scheduled jobs · File processing · API integrations), Frontend (HTML · CSS · JavaScript · Flutter · Dart), and Deployment (Wasmer · Vercel · Netlify · Render · Docker).",
   },
   {
+    id: "ovyth",
+    title: "Ovyth — Compiled Language for Automation",
+    keywords: [
+      "ovyth", "compiler", "language", "compiled", "compilation", "systems",
+      "programming", "llvm", "native", "performance", "benchmark", "binary",
+    ],
+    summary:
+      "A small compiled language for automation and AI tooling: write .ov files, compile to native executables with no interpreter, VM, or runtime to install. The compiler emits LLVM IR and uses clang -O3 -march=native with link-time optimization. Startup is ~6ms, a hello-world binary is 18 KB, and it beats Python by 2.5x–310x on loops, recursion, and list building.",
+    detail:
+      "The zero-dependency core runs fully offline with a hashing embedder and extractive LLM fallback — every test is deterministic with zero API spend. Currently actively building at github.com/mrsehajofficial/ovyth.",
+    links: [
+      { label: "View Ovyth on GitHub ↗", href: "https://github.com/mrsehajofficial/ovyth" },
+    ],
+  },
+  {
     id: "aegis",
     title: "Aegis — Telegram Group Management Bot",
     keywords: [
@@ -190,6 +205,11 @@ const SYNONYMS: Record<string, string[]> = {
   sql: ["sqlite", "sqlalchemy"],
   database: ["sqlite", "sqlalchemy", "schema"],
   deploy: ["deployment"],
+  compiler: ["ovyth", "language", "systems"],
+  language: ["ovyth", "compiler"],
+  ovyth: ["compiler", "language", "systems"],
+  compiled: ["compiler", "ovyth"],
+  binary: ["compiler", "ovyth", "compiled"],
   hosting: ["deployment"],
   cloud: ["deployment"],
   site: ["deployment", "capabilities"],

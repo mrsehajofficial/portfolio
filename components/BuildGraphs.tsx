@@ -73,7 +73,7 @@ export default function BuildGraphs() {
                   ))}
                 </div>
 
-                <p className="note">
+                 <p className="note">
                   <b>Load-bearing decision.</b> {build.note}
                 </p>
 
@@ -81,6 +81,23 @@ export default function BuildGraphs() {
                   {build.tags.map((t) => (
                     <span className="tag" key={t}>{t}</span>
                   ))}
+                </div>
+
+                <div className="link-row" style={{ marginTop: 22 }}>
+                  <a
+                    className="btn-ghost primary"
+                    href={`/work/${build.id}`}
+                  >
+                    Full case study ↗
+                  </a>
+                  <a
+                    className="btn-ghost"
+                    href={build.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Source ↗
+                  </a>
                 </div>
               </div>
             </article>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { retrieveWithScores } from "@/lib/portfolio-knowledge";
+import { METRICS_NOTE } from "@/lib/content";
 
 type RetrievalResult = ReturnType<typeof retrieveWithScores>;
 
@@ -12,6 +13,7 @@ type Metric = {
   tone: "ok" | "accent" | "gold" | "info" | "hot" | "llm" | "warn";
   sparkTone: "ok" | "accent" | "gold" | "info" | "llm" | "hot";
   sub: string;
+  simulated?: boolean;
 };
 
 // `gold` metrics render in the accent colour — the palette keeps one
@@ -173,7 +175,12 @@ export default function ConsoleHero({ metrics }: Props) {
               <div className="tiles" style={{ gap: 12 }}>
                 {metrics.map((m, i) => (
                   <div className="tile" key={m.label}>
-                    <p className="tile-label">{m.label}</p>
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                      <p className="tile-label">{m.label}</p>
+                      {m.simulated && (
+                        <span className="mono" style={{ fontSize: 10, opacity: 0.5 }}>sim</span>
+                      )}
+                    </div>
                     <p className={`tile-value ${TONE_CLASS[m.tone] ?? "v-accent"}`}>
                       {m.value}
                       {m.suffix && <small>{m.suffix}</small>}
@@ -188,6 +195,9 @@ export default function ConsoleHero({ metrics }: Props) {
                   </div>
                 ))}
               </div>
+              <p className="mono" style={{ fontSize: 11, opacity: 0.5, marginTop: 14 }}>
+                {METRICS_NOTE}
+              </p>
             </div>
           </div>
         </div>

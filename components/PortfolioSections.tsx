@@ -7,6 +7,7 @@ import PipelinePanel from "@/components/PipelinePanel";
 import EventStream from "@/components/EventStream";
 import BuildGraphs from "@/components/BuildGraphs";
 import TakesLog from "@/components/TakesLog";
+import ExplorationsPreview from "@/components/ExplorationsPreview";
 import StackMonitor from "@/components/StackMonitor";
 import ContactTerminal from "@/components/ContactTerminal";
 import Footer from "@/components/Footer";
@@ -35,6 +36,7 @@ export default function PortfolioSections() {
         <PipelinePanel />
         <EventStream />
         <BuildGraphs />
+        <ExplorationsPreview />
         <TakesLog />
         <OperatorPanel />
         <StackMonitor />

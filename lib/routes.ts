@@ -10,6 +10,7 @@ export const PAGE_PATHS = {
   pipeline: "/pipeline",
   stream: "/stream",
   work: "/work",
+  explorations: "/explorations",
   takes: "/takes",
   about: "/about",
   stack: "/stack",
@@ -23,7 +24,9 @@ export const NAV_ROUTES = [
   { href: PAGE_PATHS.pipeline, label: "Pipeline" },
   { href: PAGE_PATHS.stream, label: "Live stream" },
   { href: PAGE_PATHS.work, label: "Work" },
+  { href: PAGE_PATHS.explorations, label: "Explorations" },
   { href: PAGE_PATHS.takes, label: "Takes" },
   { href: PAGE_PATHS.about, label: "About" },
   { href: PAGE_PATHS.stack, label: "Stack" },
+  { href: PAGE_PATHS.faq, label: "FAQ" },
 ] as const;

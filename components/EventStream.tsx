@@ -105,7 +105,8 @@ export default function EventStream({ hideIntro = false }: { hideIntro?: boolean
               Async event loop
             </span>
             <span className="card-meta">
-              {rows.length} of {MAX_ROWS} buffered · no blocking i/o
+              {rows.length} of {MAX_ROWS} buffered · no blocking i/o{" "}
+              <span className="mono" style={{ fontSize: 10, opacity: 0.5 }}>sim</span>
             </span>
           </div>
           <div className="card-body">

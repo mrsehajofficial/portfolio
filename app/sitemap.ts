@@ -22,6 +22,7 @@ interface PageSpec {
  *   /stack      0.85 — best "Python / Flask / LLM stack" query surface
  *   /about      0.8  — trust and availability
  *   /takes      0.75 — differentiation; converts readers, not searches
+ *   /explorations 0.7 — current deep-dive projects
  *   /faq        0.7  — long-tail query capture
  *   /stream     0.6  — live demo, little standalone search value
  *
@@ -41,6 +42,7 @@ const PAGES: readonly PageSpec[] = [
   { path: PAGE_PATHS.stack, changeFrequency: "monthly", priority: 0.85 },
   { path: PAGE_PATHS.about, changeFrequency: "monthly", priority: 0.8 },
   { path: PAGE_PATHS.takes, changeFrequency: "monthly", priority: 0.75 },
+  { path: PAGE_PATHS.explorations, changeFrequency: "monthly", priority: 0.7 },
   { path: PAGE_PATHS.faq, changeFrequency: "monthly", priority: 0.7 },
   { path: PAGE_PATHS.stream, changeFrequency: "monthly", priority: 0.6 },
 ];

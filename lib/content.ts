@@ -22,6 +22,8 @@ export const PERSON = {
   github: "https://github.com/mrsehajofficial",
   githubRepo: "https://github.com/mrsehajofficial/aegis",
   githubRepoAmaiYuki: "https://github.com/mrsehajofficial/Amai-Yuki",
+  githubRepoRag: "https://github.com/mrsehajofficial/Rag-pipeline",
+  githubRepoOvyth: "https://github.com/mrsehajofficial/ovyth",
   linkedin: "https://www.linkedin.com/in/mrsehajofficial/",
   instagram: "https://www.instagram.com/sehaj.varma.official/",
   location: "India",
@@ -93,6 +95,7 @@ export type Project = {
   title: string;
   subtitle: string;
   problem: string;
+  why: string;
   built: string[];
   result: string;
   tags: string[];
@@ -111,6 +114,8 @@ export const AEGIS: Project = {
   subtitle: "Production-grade Telegram group management & business automation",
   problem:
     "Running active Telegram communities and business chats usually means cobbling together multiple third-party bots, losing control over rate limits, data privacy, and auto-replies. I wanted deterministic protection, sliding-window anti-flood, and automated business workflows under one tight, async Python architecture.",
+  why:
+    "Telegram groups of any size are attack surfaces by default: spam, raids, link flooding, and bot raids happen continuously. A rented bot can only react after a message lands. Aegis moves rate limiting and anti-spam into the event loop itself — the decision to block happens in microseconds, before the message reaches anyone's screen. The business automation layer exists because community management is a 24/7 conversation, not a 9-to-5 job — keywords trigger replies with cooldowns, and the anti-loop guards prevent the bot from arguing with itself.",
   built: [
     "Asynchronous Python 3.11+ event loop built on python-telegram-bot v21+ and SQLAlchemy 2.0 with async engine support (aiosqlite & asyncpg).",
     "Real-time protection engine: sliding-window rate limits per user, regex anti-spam, blacklists, and progressive warnings.",
@@ -156,6 +161,8 @@ export const AMAI_YUKI: Project = {
   subtitle: "A real-time messaging app, from zero to shipped",
   problem:
     "Off-the-shelf messaging backends own your data flow, your latency, and every feature they never bothered to expose. I wanted the protocol layer and the camera module to be mine — so I stopped negotiating with someone else's API and built the thing from zero.",
+  why:
+    "Every messaging-as-a-service decision made the product less controllable: latency was rented, data flow was opaque, and the camera feature was impossible because their API didn't expose it. Building the protocol layer myself meant owning the handshake, the serialization, the retry logic — and owning the camera module meant the frontend could capture exactly what it needed, in-app, with no permission gymnastics. The LLM features were layered in last, driven by prompt orchestration so they behave on a Tuesday as well as they did in the demo.",
   built: [
     "A Flask REST backend on SQLite. Every route validates its input — the first version didn't, and it bit me exactly once before I fixed that permanently.",
     "Direct and group chat running over the project's own protocol layer, not a rented one.",
@@ -200,6 +207,8 @@ export const RAG_PIPELINE: Project = {
   subtitle: "Production-grade hybrid retrieval-augmented generation system",
   problem:
     "Most RAG projects are LangChain wrappers with no tests, no security, and no observability — they work in a demo and fall apart in production. I wanted a pipeline with real engineering: hybrid retrieval that actually finds the right chunks, thread-safe caching, graceful degradation when the LLM is down, and a deployment story that doesn't require a PhD in DevOps.",
+  why:
+    "A single-vector search looks clean in a demo and quietly fails on real content, because cosine similarity rewards topical similarity while the answers people need are often exact identifiers — a function name, an error code, a model version. Running sparse retrieval alongside dense retrieval and fusing by rank makes both failure modes survivable. The reranker gets veto power for the same reason: fusion can surface a chunk that is fluent and irrelevant. The production WSGI layer exists because demos don't handle concurrent requests, API key rotation, or SIGTERM during a deploy — and those are the moments that wake you up at 3am.",
   built: [
     "Hybrid retrieval: dense embeddings + BM25 sparse search fused with Reciprocal Rank Fusion, then reranked with a lexical-overlap scorer and diversified with Maximal Marginal Relevance — the full stack the literature recommends, not just a vector search.",
     "Thread-safe everything: RLock-protected LRU caches, a lock-guarded BM25 index, content-hash dedup on ingest so re-indexing is idempotent, and streaming trace emission in a finally block so client disconnects don't swallow telemetry.",
@@ -378,11 +387,61 @@ export const EVIDENCE = [
     body: "OpenAI and Gemini integrations, prompt orchestration systems, RAG architecture studies. Most of it feeds Amai Yuki's LLM-assisted features. The interesting engineering isn't the demo — it's the gap between demo and reliable.",
   },
   {
+    id: "ovyth",
+    title: "Current exploration: Ovyth",
+    body: "A compiled language for automation — write .ov files, compile to native executables with no runtime to install. Beats Python by 2.5x–310x on loops and recursion, stays within 1.8x of -O3 C on tight integer loops. See the full write-up on the explorations page.",
+  },
+  {
     id: "this-site",
     title: "This site itself",
     body: "A static Next.js build — server-rendered so crawlers see everything, zero external calls, and a small client-side retrieval engine that answers questions from the site's own facts. It's also the reason this page loads fast.",
   },
 ] as const;
+
+/* ── Current explorations ────────────────────────────────────────────────── */
+
+export type Exploration = {
+  id: string;
+  order: string;
+  title: string;
+  subtitle: string;
+  status: string;
+  problem: string;
+  built: string[];
+  result: string;
+  tags: readonly string[];
+  sourceUrl: string;
+  liveUrl?: string;
+  year: string;
+  summary: string;
+};
+
+export const EXPLORATIONS: readonly Exploration[] = [
+  {
+    id: "ovyth",
+    order: "01",
+    title: "Ovyth",
+    subtitle: "A compiled language for automation and AI tooling",
+    status: "actively building",
+    problem:
+      "Python is the right tool for orchestration and data plumbing, but its startup cost and interpreter overhead are a tax on every scheduled job and every latency-sensitive tool. I wanted to explore whether a small compiled language targeting Linux x86-64 could give the ergonomics of Python scripting with the performance of native binaries — no interpreter, no VM, no runtime to install on the target machine.",
+    built: [
+      "A from-scratch compiler in Python emitting LLVM IR, with a self-hosted runtime archive (libovrt.a) and C header for native linking.",
+      "A custom value type system — 16-byte tagged structs — supporting int, float, string, list, and map as first-class values with automatic memory management.",
+      "A tree-walking interpreter for rapid iteration during development, plus an ahead-of-time native backend using clang -O3 -march=native with link-time optimization.",
+      "A REPL and module system; dead-code stripping leaves a 18 KB hello-world binary.",
+      "Proven int/float unboxing in hot loops — the compiler tracks register residency for locals the body never writes, shadows, or captures.",
+      "Benchmark suite comparing Ovyth against Python 3, C (clang -O3 -march=native), and reference algorithms — all checked for answer equality before timing is reported.",
+    ],
+    result:
+      "Measured against Python and C: 2.5x-310x faster on loops, recursion, and list building; 1.2x-1.6x of Python where it loses; within 1.8x of -O3 C on a tight integer loop. The compiler is self-bootstrapping on the native backend, and every test is deterministic with zero API spend. The full performance report is in docs/PERFORMANCE.md.",
+    tags: ["Compiler", "LLVM", "Systems Programming", "Performance", "Python", "C"],
+    sourceUrl: "https://github.com/mrsehajofficial/ovyth",
+    year: "2026",
+    summary:
+      "A compiled language for automation — write .ov files, compile to native executables with no runtime to install. Beats Python by 2.5x-310x on loops and recursion, stays within 1.8x of -O3 C on tight integer loops.",
+  },
+];
 
 /* ── About ──────────────────────────────────────────────────────────────── */
 
@@ -444,14 +503,25 @@ export const LIVE_METRICS: readonly {
   tone: "ok" | "info" | "gold" | "hot" | "llm" | "warn";
   sparkTone: "ok" | "info" | "gold" | "hot" | "llm";
   sub: string;
+  simulated?: boolean;
 }[] = [
   { label: "tests passing", value: "80", suffix: "", tone: "ok", sparkTone: "ok", sub: "6 suites · ci" },
   { label: "coverage", value: "60", suffix: "%+", tone: "gold", sparkTone: "gold", sub: "enforced gate" },
   { label: "uptime", value: "99.98", suffix: "%", tone: "ok", sparkTone: "ok", sub: "wasmer edge" },
-  { label: "retrieval p54", value: "1.2", suffix: "ms", tone: "info", sparkTone: "info", sub: "indexed, in-memory" },
-  { label: "async throughput", value: "12.4", suffix: "k/s", tone: "hot", sparkTone: "hot", sub: "event loop" },
+  { label: "retrieval p54", value: "1.2", suffix: "ms", tone: "info", sparkTone: "info", sub: "indexed, in-memory", simulated: true },
+  { label: "async throughput", value: "12.4", suffix: "k/s", tone: "hot", sparkTone: "hot", sub: "event loop", simulated: true },
   { label: "llm fallbacks", value: "0", suffix: "", tone: "llm", sparkTone: "llm", sub: "graceful, not silent" },
 ];
+
+/**
+ * Honest disclosure about the live metrics above.
+ * The first three are measured from the RAG pipeline's CI and Wasmer deployment.
+ * The retrieval latency and async throughput are synthetic — the portfolio is a
+ * static site with no backend, so the values cycle deterministically. They're
+ * representative of the architecture, not sampled from a live instance.
+ */
+export const METRICS_NOTE =
+  "Tests, coverage, and uptime are real. The retrieval latency and async throughput below are synthetic — this portfolio is a static site with no backend, so those values cycle deterministically as a representative illustration of the architecture."
 /* ── Engineering Philosophy (wrong takes) ──────────────────────────────────── */
 
 export type Opinion = {
@@ -588,3 +658,11 @@ export const FOOTER = {
   line: "built with next.js — server-rendered, zero external calls",
   endMark: "end of sheet",
 } as const;
+
+/** Lookup a project by its slug id — used by dynamic /work/[id] routes. */
+export function getProject(id: string): Project | undefined {
+  return PROJECTS.find((p) => p.id === id);
+}
+
+/** All project IDs — used by generateStaticParams for /work/[id]. */
+export const PROJECT_IDS: readonly string[] = PROJECTS.map((p) => p.id);

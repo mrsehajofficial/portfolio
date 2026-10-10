@@ -15,10 +15,12 @@ export const PERSON_ID = `${SITE_URL}#sehaj-varma`;
 
 export const SAME_AS = [
   PERSON.github,
-  PERSON.linkedin,
-  PERSON.instagram,
   PERSON.githubRepo,
   PERSON.githubRepoAmaiYuki,
+  PERSON.githubRepoRag,
+  PERSON.githubRepoOvyth,
+  PERSON.linkedin,
+  PERSON.instagram,
 ];
 
 /** The shared Person node — spread into any page's @graph. */
