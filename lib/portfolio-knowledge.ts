@@ -40,9 +40,10 @@ export const KNOWLEDGE_CARDS: KnowledgeCard[] = [
     summary:
       "A small compiled language for automation and AI tooling: write .ov files, compile to native executables with no interpreter, VM, or runtime to install. The compiler emits LLVM IR and uses clang -O3 -march=native with link-time optimization. Startup is ~6ms, a hello-world binary is 18 KB, and it beats Python by 2.5x–310x on loops, recursion, and list building.",
     detail:
-      "The zero-dependency core runs fully offline with a hashing embedder and extractive LLM fallback — every test is deterministic with zero API spend. Currently actively building at github.com/mrsehajofficial/ovyth.",
+      "The zero-dependency core runs fully offline with a hashing embedder and extractive LLM fallback — every test is deterministic with zero API spend. Currently actively building. Full details on the explorations page.",
     links: [
       { label: "View Ovyth on GitHub ↗", href: "https://github.com/mrsehajofficial/ovyth" },
+      { label: "Read the full case study ↗", href: "/explorations" },
     ],
   },
   {
